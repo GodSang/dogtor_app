@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".InitInfo">
 
+    // TODO: 키 없애기
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/init_profile_picture"
         android:src="@drawable/dog_profile"
