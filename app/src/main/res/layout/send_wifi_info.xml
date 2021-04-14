@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/wifi_name"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginLeft="16dp"
+            android:text="와이파이 이름"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/wifi_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginLeft="16dp"
+            android:text="Password"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/input_wifi_name"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:hint="id"
+            android:lines="1"
+            android:textSize="16sp"
+            android:imeOptions="actionNext">
+        </EditText>
+
+        <EditText
+            android:id="@+id/input_wifi_pwd"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="8dp"
+            android:lines="1"
+            android:hint="password"
+            android:textSize="16sp"
+            android:inputType="numberPassword">
+        </EditText>
+    </LinearLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DOGTOR</string>
+
+    <string name="login">로그인</string>
+    <string name="login_id_hint">ID</string>
+    <string name="login_pwd_hint">PASSWORD</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

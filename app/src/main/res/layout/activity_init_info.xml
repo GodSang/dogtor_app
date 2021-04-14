@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InitInfo">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/init_profile_picture"
+        android:src="@drawable/dog_profile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.3">
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:id="@+id/profile_msg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:text="반려동물의 프로필사진을 선택하세요."
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/init_profile_picture"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.03">
+    </TextView>
+
+    <EditText
+        android:id="@+id/dog_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="반려동물의 이름을 입력하세요."
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/login_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_msg"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08">
+    </EditText>
+
+    <EditText
+        android:id="@+id/dog_age"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="반려동물의 나이를 입력하세요"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:inputType="number"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/login_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dog_name"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08">
+    </EditText>
+
+    <EditText
+        android:id="@+id/dog_sex"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="반려동물의 성별을 입력하세요."
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/login_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dog_age"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08">
+    </EditText>
+
+    <EditText
+        android:id="@+id/dog_kind"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="반려동물의 견종을 입력하세요."
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/login_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dog_sex"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/dog_weight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="반려동물의 몸무게를 입력하세요."
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/login_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dog_kind"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08">
+    </EditText>
+
+    <EditText
+        android:id="@+id/dog_height"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="반려동물의 키를 입력하세요."
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/login_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dog_weight"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08">
+    </EditText>
+
+    <Button
+        android:id="@+id/dog_service_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="DOGTOR의 서비스를 시작하세요."
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:backgroundTint="@color/main_color"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dog_height"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08">
+    </Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

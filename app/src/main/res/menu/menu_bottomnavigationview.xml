@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/main_home"
+        android:icon="?android:attr/listChoiceIndicatorMultiple"
+        android:title="홈"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/guide"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="가이드"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/record"
+        android:icon="?attr/actionModePasteDrawable"
+        android:title="기록"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="설정"
+        app:showAsAction="always" />
+</menu>
