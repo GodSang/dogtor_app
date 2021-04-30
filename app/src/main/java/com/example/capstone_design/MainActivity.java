@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.capstone_design.initInfo.InfoPost;
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     InitRetofitAPI initRetofitAPI;
 
     String uid;
-    Bundle home_bundle;
+    String name, gender, type;
+    int birth, weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new FragmentMainHome()).commit();
-
-        FragmentView(TAG_HOME_FRAGMENT, fragmentMainHome);
 
         //uid 가져오기
         Intent get_uid_intent = getIntent();
@@ -71,23 +71,26 @@ public class MainActivity extends AppCompatActivity {
         initRetofitAPI = retrofit.create(InitRetofitAPI.class); // 인터페이스 생성
 
         // GET 요청
-        initRetofitAPI.getData(uid).enqueue(new Callback<List<InfoPost>>() {
+        initRetofitAPI.getData(uid).enqueue(new Callback<InfoPost>() {
             @Override
-            public void onResponse(Call<List<InfoPost>> call, Response<List<InfoPost>> response) {
+            public void onResponse(Call<InfoPost> call, Response<InfoPost> response) {
                 if(response.isSuccessful()){
-                    List<InfoPost> data = response.body();
+                    InfoPost data = response.body();
                     // 홈 프래그먼트로 보낼 데이터들
-                    home_bundle = new Bundle(5);
-                    home_bundle.putString("dog_name", data.get(0).getDog_name());
-                    home_bundle.putInt("dog_birth", data.get(0).getDog_birth());
-                    home_bundle.putString("dog_gender", data.get(0).getDog_gender());
-                    home_bundle.putString("dog_type", data.get(0).getDog_type());
-                    home_bundle.putInt("dog_weight", data.get(0).getDog_weight());
+
+                    Log.d("hyeals_bundle", data.getDog_name());
+                    name = data.getDog_name();
+                    birth = data.getDog_birth();
+                    gender = data.getDog_gender();
+                    type = data.getDog_type();
+                    weight =  data.getDog_weight();
                 }
+
+                FragmentView(TAG_HOME_FRAGMENT, fragmentMainHome);
             }
 
             @Override
-            public void onFailure(Call<List<InfoPost>> call, Throwable t) {
+            public void onFailure(Call<InfoPost> call, Throwable t) {
                     t.printStackTrace();
             }
         });
@@ -126,6 +129,17 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
 
         if(manager.findFragmentByTag(tag)==null){
+            if(tag == TAG_HOME_FRAGMENT){
+                Bundle home_bundle = new Bundle(5);
+                home_bundle.putString("dog_name",name);
+                home_bundle.putInt("dog_birth", birth);
+                home_bundle.putString("dog_gender", gender);
+                home_bundle.putString("dog_type", type);
+                home_bundle.putInt("dog_weight", weight);
+                fragmentMainHome.setArguments(home_bundle);
+
+                Log.d("hyeals_bundle_name", home_bundle.getString("dog_name"));
+            }
             transaction.add(R.id.fragment, fragment, tag);
         }
 
@@ -151,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
         //Show current Fragment
         if(tag == TAG_HOME_FRAGMENT){
             if(main_home!=null){
-                fragmentMainHome.setArguments(home_bundle);
                 transaction.show(main_home);
             }
         }

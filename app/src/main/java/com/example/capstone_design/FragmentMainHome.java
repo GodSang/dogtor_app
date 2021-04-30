@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +36,6 @@ public class FragmentMainHome extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_home, container, false);
 
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         main_dog_name = view.findViewById(R.id.main_dog_name);
         main_dog_age = view.findViewById(R.id.main_dog_age);
         main_dog_gender = view.findViewById(R.id.main_dog_gender);
@@ -49,14 +43,24 @@ public class FragmentMainHome extends Fragment {
         main_dog_weight = view.findViewById(R.id.main_dog_weight);
 
         home_bundle = getArguments();
+        Log.d("hyeals_bundle_fragment", "프래그먼트 실행");
 
         if(home_bundle != null){
+            Log.d("hyeals_bundle_fragment", "여기 실행");
+            Log.d("hyeals_bundle_fragment", home_bundle.getString("dog_name"));
             main_dog_name.setText("이름: " + home_bundle.getString("dog_name"));
             main_dog_age.setText("나이: " + home_bundle.getInt("dog_birth"));
             main_dog_gender.setText("성별: " + home_bundle.getString("dog_gender"));
             main_dog_type.setText("견종: " + home_bundle.getString("dog_type"));
             main_dog_weight.setText("몸무게: " + home_bundle.getInt("dog_weight"));
         }
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // 내부 DB 호출
         //SharedPreferences loadShared = getActivity().getSharedPreferences(loadSharedName, Context.MODE_PRIVATE);
