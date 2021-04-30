@@ -116,16 +116,24 @@
         app:layout_constraintWidth_percent="0.26">
     </Button>
 
-    <ListView
-        android:id="@+id/scaned_bluetooth_list"
+    <ScrollView
+        android:id="@+id/scaned_bluetooth_list_scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registered_device_info"
         app:layout_constraintBottom_toTopOf="@id/register_device_btn">
+
+    <ListView
+        android:id="@+id/scaned_bluetooth_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     </ListView>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/register_device_btn"
@@ -141,7 +149,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scaned_bluetooth_list"
+        app:layout_constraintTop_toBottomOf="@+id/scaned_bluetooth_list_scroll"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08">

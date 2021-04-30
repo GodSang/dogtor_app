@@ -43,7 +43,7 @@
         android:gravity="center_vertical"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="150dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/main_dog_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
         android:gravity="center_vertical"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@id/main_dog_name"
         app:layout_constraintStart_toEndOf="@id/main_dog_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,22 +70,22 @@
     </TextView>
 
     <TextView
-        android:id="@+id/main_dog_sex"
+        android:id="@+id/main_dog_gender"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
         android:text="성별: "
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
-        android:gravity="center_vertical"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/main_dog_age"
-        app:layout_constraintStart_toEndOf="@id/main_dog_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.04">
-    </TextView>
+        app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintHorizontal_bias="0.769"
+        app:layout_constraintStart_toEndOf="@id/main_dog_profile_image"
+        app:layout_constraintTop_toBottomOf="@id/main_dog_age"></TextView>
 
     <TextView
         android:id="@+id/main_dog_kind"
@@ -97,8 +97,8 @@
         android:gravity="center_vertical"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/main_dog_sex"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/main_dog_gender"
         app:layout_constraintStart_toEndOf="@id/main_dog_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
@@ -115,7 +115,7 @@
         android:gravity="center_vertical"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@+id/main_dog_kind"
         app:layout_constraintStart_toEndOf="@id/main_dog_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -123,23 +123,7 @@
         app:layout_constraintHeight_percent="0.04">
     </TextView>
 
-    <TextView
-        android:id="@+id/main_dog_height"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="키: "
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
-        android:gravity="center_vertical"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/main_dog_weight"
-        app:layout_constraintStart_toEndOf="@id/main_dog_profile_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.04">
-    </TextView>
+
 
     <TextView
         android:id="@+id/dog_status_info"
@@ -156,7 +140,7 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_dog_height"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/main_dog_weight"></TextView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

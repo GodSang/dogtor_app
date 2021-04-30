@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.capstone_design.MainActivity;
 import com.example.capstone_design.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -56,14 +58,19 @@ public class BluetoothActivity extends AppCompatActivity {
 
     private BluetoothAdapter btAdapter;
     private final static int REQUEST_ENABLE_BT = 1;
+    BluetoothDevice device;
     BluetoothSocket btSocket = null;
     ConnectedThread connectedThread;
     Set<BluetoothDevice> pairedDevices;
     ArrayAdapter<String> btArrayAdapter;
     ArrayList<String> deviceAddressArray;
 
-    String TAG = "BluetoothActivity";
+    String TAG = "HYEALS";
     UUID BT_MODULE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // 라즈베리파이/아두이노-안드로이드 블루투스 통신 프로토콜(SerialPortServiceClass_UUID)
+
+    // 디바이스 uuid 기본값
+    UUID device_uuid = UUID.fromString("00001132-0000-1000-8000-00805f9b34fb");
+    UUID deviceN_uuid = UUID.fromString("00001133-0000-1000-8000-00805f9b34fb");
 
     // 디바이스와 연결할 때 사용
     private String name=""; // 디바이스 이름
@@ -90,14 +97,14 @@ public class BluetoothActivity extends AppCompatActivity {
         bluetooth_scan_btn = findViewById(R.id.bluetooth_scan_btn);
         scaned_bluetooth_list = findViewById(R.id.scaned_bluetooth_list);
         register_device_btn = findViewById(R.id.register_device_btn);
-//        input_wifi_name = findViewById(R.id.input_wifi_name);
-//        input_wifi_pwd = findViewById(R.id.input_wifi_pwd);
 
         // 뒤로가기 버튼
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
         });
 
@@ -105,14 +112,14 @@ public class BluetoothActivity extends AppCompatActivity {
         Intent get_uid_intent = getIntent();
         uid = get_uid_intent.getStringExtra("uid");
 
-        Log.d("UID", "UID: " + uid);
+        Log.d(TAG, "UID: " + uid);
 
         // 블루투스 활성화
         btAdapter = BluetoothAdapter.getDefaultAdapter();
 
         // 리스트뷰에 리스트 항목 연결
-        deviceAddressArray = new ArrayList<String>();
-        btArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, deviceAddressArray);
+        deviceAddressArray = new ArrayList<>();
+        btArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         scaned_bluetooth_list.setAdapter(btArrayAdapter);
 
 
@@ -127,9 +134,6 @@ public class BluetoothActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
-//                registered_device_info.setText(name);
-//                Log.d("Address", "Address: " + name);
 
                 btArrayAdapter.clear();
                 if (deviceAddressArray != null && !deviceAddressArray.isEmpty()) {
@@ -187,10 +191,13 @@ public class BluetoothActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               BluetoothDevice device = btAdapter.getRemoteDevice(address);
+                Log.d(TAG, "address: " + address);
+                Log.d(TAG, "device: " + btAdapter.getRemoteDevice(address).getClass().getName());
 
-                Log.d("DATA SEND", "name: " + name + "/" + "address: " + address);
-                Log.d("DATA SEND", uid + "/" + wifi_name + "/" + wifi_pwd);
+                device = btAdapter.getRemoteDevice(address);
+
+                Log.d(TAG, "name: " + name + "/" + "address: " + address);
+                Log.d(TAG, uid + "/" + wifi_name + "/" + wifi_pwd);
 
                 // 소켓 생성 및 연결
                 try{
@@ -210,6 +217,7 @@ public class BluetoothActivity extends AppCompatActivity {
 
                 if(connectedThread!=null){
                     connectedThread.write(uid + "/" + wifi_name + "/" + wifi_pwd);
+                    Log.d(TAG, " [데이터 보냄] " + "디바이스 이름: " + device.getName() + "/ 디바이스 UUID: "  + device.getUuids() + "/ UID: " + uid + "/ WIFI NAME: " + wifi_name + "/ WIFI PWD: " + wifi_pwd);
                 }
             }
         });
@@ -229,9 +237,11 @@ public class BluetoothActivity extends AppCompatActivity {
             address = deviceAddressArray.get(position); // 디바이스 MAC 주소 얻어오는 부분
             flag = true;
 
+            Log.d(TAG, "name: " + name +  " " + "address: " + address);
+
             View v = getLayoutInflater().inflate(R.layout.send_wifi_info, null);
 
-            // WIFI 입력 다이얼로그 띄우기
+             //WIFI 입력 다이얼로그 띄우기
             AlertDialog.Builder dialog = new AlertDialog.Builder(BluetoothActivity.this);
                     dialog.setTitle("디바이스와 연결할 WIFI 정보 입력");
                     dialog.setView(v)
@@ -244,7 +254,8 @@ public class BluetoothActivity extends AppCompatActivity {
                                 wifi_pwd = input_wifi_pwd.getText().toString();
                         }
                     })
-                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(
+                            "취소", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();

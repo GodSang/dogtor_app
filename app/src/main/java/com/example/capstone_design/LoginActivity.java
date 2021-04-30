@@ -270,11 +270,13 @@ public class LoginActivity extends AppCompatActivity {
                                 if(data.getNext().equals("signup")){
 
                                     Intent intent_init = new Intent(getApplicationContext(), InitInfo.class);
+                                    intent_init.putExtra("uid", uid);
                                     startActivity(intent_init);
                                     finish();
 
                                 }else if(data.getNext().equals("login")){
                                     Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent_main.putExtra("uid", uid);
                                     startActivity(intent_main);
                                     finish();
                                 }
@@ -302,7 +304,7 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
         // 자동 로그인
-        //nextPage(currentUser);
+        nextPage(currentUser);
     }
 
     @Override
