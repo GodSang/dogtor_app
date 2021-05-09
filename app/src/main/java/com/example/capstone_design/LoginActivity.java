@@ -129,9 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         // 서버와 통신시 필요
         Retrofit retrofit = new Retrofit.Builder()
                        .baseUrl("http://13.209.18.94:3000") // 주소값 중에 바뀌지 않는 고정값
-                       //.baseUrl("http://172.30.1.7")
                        .addConverterFactory(GsonConverterFactory.create()) // gson으로 converter를 생성 => gson은 JSON을 자바 클래스로 바꾸는데 사용됨
-                       //.client(okHttpClient)
                        .build();
                 login_retrofitAPI = retrofit.create(LoginRetrofitAPI.class); // 인터페이스 생성
 

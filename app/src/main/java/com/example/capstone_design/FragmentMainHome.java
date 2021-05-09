@@ -57,19 +57,4 @@ public class FragmentMainHome extends Fragment {
 
         return view;
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // 내부 DB 호출
-        //SharedPreferences loadShared = getActivity().getSharedPreferences(loadSharedName, Context.MODE_PRIVATE);
-
-        //main_dog_name.setText("이름: " + loadShared.getString("dog_name", "null"));
-        //main_dog_age.setText("나이: " + String.valueOf(loadShared.getInt("dog_birth", 0)));
-        //main_dog_gender.setText("성별: " + loadShared.getString("dog_gender", "null"));
-        //main_dog_type.setText("견종: " + loadShared.getString("dog_type", "null"));
-        //main_dog_weight.setText("몸무게: " + String.valueOf(loadShared.getInt("dog_weight", 0)));
-
-    }
 }

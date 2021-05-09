@@ -46,10 +46,6 @@ public class InitInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_info);
 
-        // 내부 DB 생성
-        //SharedPreferences saveShared = getSharedPreferences(saveSharedName, MODE_PRIVATE);
-        //SharedPreferences.Editor sharedEditor = saveShared.edit();
-
         //uid 가져오기
         Intent get_uid_intent = getIntent();
         uid = get_uid_intent.getStringExtra("uid");
@@ -63,9 +59,7 @@ public class InitInfo extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://13.209.18.94:3000") // 주소값 중에 바뀌지 않는 고정값
-                //.baseUrl("http://172.30.1.7")
                 .addConverterFactory(GsonConverterFactory.create()) // gson으로 converter를 생성 => gson은 JSON을 자바 클래스로 바꾸는데 사용됨
-                //.client(okHttpClient)
                 .build();
         initRetofitAPI = retrofit.create(InitRetofitAPI.class); // 인터페이스 생성
 
@@ -88,21 +82,9 @@ public class InitInfo extends AppCompatActivity {
                     public void onResponse(Call<InfoPost> call, Response<InfoPost> response) {
                         if(response.isSuccessful()){
                             InfoPost data = response.body();
-
-                            // TODO: response 처리
-                            // TODO: response 데이터 내부 DB에 넣기
                             
                             intent_main = new Intent(getApplicationContext(), MainActivity.class);
                             intent_main.putExtra("uid", uid);
-
-                            // 내부 DB에 강아지 정보 저장
-                            //sharedEditor.putString("dog_name", data.getDog_name());
-                            //sharedEditor.putInt("dog_birth", data.getDog_birth());
-                            //sharedEditor.putString("dog_gender", data.getDog_gender());
-                            //sharedEditor.putString("dog_type", data.getDog_type());
-                            //sharedEditor.putInt("dog_weight", data.getDog_weight());
-
-                            //sharedEditor.commit();
 
                             startActivity(intent_main);
                             finish();
