@@ -52,7 +52,7 @@ import static java.lang.Thread.sleep;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView retrofit_test;    EditText user_ID;
+    EditText user_ID;
     EditText user_Password;
     Button login_btn;
     TextView sign_up_tv;
@@ -81,11 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //TextView retrofit_test = findViewById(R.id.retrofit_test_tv);
-        user_ID = findViewById(R.id.userid_et);
-        user_Password = findViewById(R.id.password_et);
-        login_btn = findViewById(R.id.login_btn);
-        sign_up_tv = findViewById(R.id.sign_up_tv);
         google_login_btn = findViewById(R.id.google_login_btn);
 
         // 블루투스 검색을 위해 필요한 위치권한 확인(BluetoothActivity에서 필요함)
@@ -133,49 +128,11 @@ public class LoginActivity extends AppCompatActivity {
                        .build();
                 login_retrofitAPI = retrofit.create(LoginRetrofitAPI.class); // 인터페이스 생성
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(user_ID.getText().toString().equals("") || user_ID.getText().toString() == null){
-                    Toast.makeText(getApplicationContext(), "아이디를 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else if(user_Password.getText().toString().equals("") || user_Password.getText().toString() == null){
-                    Toast.makeText(getApplicationContext(), "패스워드를 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else if(user_ID.getText().toString().equals("test") && user_Password.getText().toString().equals("test")){
-                    Toast.makeText(getApplicationContext(), "가입되어 있지 않은 사용자입니다.", Toast.LENGTH_SHORT).show();
-                } else{
-                    Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-                    //Intent intent_login_info = new Intent(getApplicationContext(), GetDataActivity.class);
-                    Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);
-
-                    startActivity(intent_main);
-
-                    id= user_ID.getText().toString();
-                    pwd = user_Password.getText().toString();
-
-                    /*intent_login_info.putExtra("id", id);
-                    intent_login_info.putExtra("pwd", pwd);
-
-                    System.out.println(user_Password.getText());
-
-                    startActivity(intent_login_info);*/
-                }
-            }
-        });
-
-        // 회원가입 화면 이동
-        sign_up_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_sign_up = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivity(intent_sign_up);
-            }
-        });
 
         // 구글 로그인 버튼
         google_login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("GO", "로그인 시작 버튼 터치");
                 signIn();
             }
         });
@@ -195,7 +152,6 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
-                Log.d("GO", "로그인 onActivityResult 끝");
 
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -215,7 +171,6 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             user = mAuth.getCurrentUser();
                             updateUI(user);
-                            Log.d("GO", "로그인 firebaseAuthWithGoogle 끝");
                             nextPage(user);
 
                             // BluetoothActivity에 uid값 전달
@@ -243,23 +198,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void nextPage(FirebaseUser user){
         if(user!=null){
-            Log.d("GO", "다음 페이지 넘어가기 함수");
+
                 HashMap<String, Object> input = new HashMap<>();
-                //input.put("email", mAuth.getCurrentUser());
-                Log.d(TAG, "사용자 UID: " + user.getUid() + " " + "사용자 이메일: " + user.getEmail());
 
                 uid = user.getUid();
                 input.put("uid", uid);
 
-                Log.d(TAG, "input에 UID 넣긴 함: " + input.get("uid").toString());
-
                 try{
-                    Log.d(TAG, "try 들어오긴 함");
 
                     login_retrofitAPI.postData(input).enqueue(new Callback<Post>() {
                         @Override
                         public void onResponse(Call<Post> call, Response<Post> response) {
-                            Log.d(TAG, "RESPONSE 받긴 함");
                             if(response.isSuccessful()){
                                 Post data = response.body();
 
@@ -283,7 +232,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Post> call, Throwable t) {
-                            Log.d(TAG, "RESPONSE 받기 실패");
                             t.printStackTrace();
                             t.getMessage();
                         }

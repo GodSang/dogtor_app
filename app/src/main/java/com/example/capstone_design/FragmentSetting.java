@@ -1,5 +1,6 @@
 package com.example.capstone_design;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.capstone_design.bluetooth.BluetoothActivity;
+import com.example.capstone_design.fcm.FcmSettingActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -28,8 +30,10 @@ public class FragmentSetting extends Fragment {
 
     private TextView setting_change_info;
     private TextView setting_bluetooth;
+    private TextView setting_alarm;
     private Button logout_btn;
     Bundle bundle; // uid 값 가져올 bundle
+    Context mContext;
     String uid;
     String TAG = "FragmentSetting";
 
@@ -43,6 +47,7 @@ public class FragmentSetting extends Fragment {
         View v = inflater.inflate(R.layout.fragment_setting, container, false);
         setting_change_info = v.findViewById(R.id.setting_change_info);
         setting_bluetooth = v.findViewById(R.id.setting_bluetooth);
+        setting_alarm = v.findViewById(R.id.setting_alarm);
         logout_btn = v.findViewById(R.id.logout_btn);
 
         bundle = getArguments();
@@ -72,11 +77,22 @@ public class FragmentSetting extends Fragment {
             }
         });
 
+        setting_alarm.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FcmSettingActivity.class);
+                intent.putExtra("uid", uid);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail().build();
 
-        googleSignInClient = GoogleSignIn.getClient(getView().getContext(),gso);
+        googleSignInClient = GoogleSignIn.getClient(mContext, gso);
 
         // 로그아웃 버튼 기능
         logout_btn.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +107,7 @@ public class FragmentSetting extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
                         Intent intent = new Intent(view.getContext(), LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        getActivity().finish();
+                        startActivity(intent);
                     }
                 });
             }
@@ -101,4 +117,9 @@ public class FragmentSetting extends Fragment {
 
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
 }

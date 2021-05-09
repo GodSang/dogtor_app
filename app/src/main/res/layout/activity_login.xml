@@ -10,111 +10,53 @@
         android:id="@+id/dogtor_logo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="50dp"
-        android:layout_marginTop="64dp"
+        android:padding="30dp"
+        android:layout_marginTop="200dp"
         android:src="@drawable/dogtor_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/userid_et"
+        app:layout_constraintBottom_toTopOf="@id/intro_text"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHeight_percent="0.3"
     ></ImageView>
 
 
-    <EditText
-        android:id="@+id/userid_et"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/login_edit"
-        android:fontFamily="sans-serif"
-        android:hint="@string/login_id_hint"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        android:selectAllOnFocus="true"
+    <TextView
+        android:id="@+id/intro_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DOGTOR 서비스를 시작해보세요!"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/gray"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dogtor_logo" />
-
-    <EditText
-        android:id="@+id/password_et"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/login_edit"
-        android:hint="@string/login_pwd_hint"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:imeActionLabel="Sign in"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userid_et" />
-
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="28dp"
-        android:backgroundTint="@color/main_color"
-        android:text="@string/login"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_et"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@id/dogtor_logo">
+    </TextView>
 
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/google_login_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintTop_toBottomOf="@id/login_btn">
+        app:layout_constraintTop_toBottomOf="@id/intro_text">
     </com.google.android.gms.common.SignInButton>
 
 
     <TextView
-        android:id="@+id/sign_up_tv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="회원가입"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/google_login_btn"
-        app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.05"
-        ></TextView>
-
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password_et"
-        app:layout_constraintStart_toStartOf="@+id/password_et"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:text="Cyber security Capstone Design Team3"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </TextView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
