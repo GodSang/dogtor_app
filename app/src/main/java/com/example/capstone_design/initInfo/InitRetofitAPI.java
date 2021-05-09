@@ -16,7 +16,6 @@ import retrofit2.http.Query;
 
 public interface InitRetofitAPI {
 
-    // get url 변경해야됨
     @GET("/user") // posts 주소임. 앞에 공통된 주소는 다른 곳에서 지정 해줄 것.
     Call<InfoPost> getData(@Header("Authorization") String authorization); // Call 객체를 선언해서 HTTP요청을 웹서버로 보냄
     // JSON 데이터를 <>안에 자료형으로 받겠다는 뜻. 따라서 Post.class를 직접 구현해야 함. id변수에 값을 담아서 userId를 쿼리함.

@@ -7,19 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".FragmentRecord">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="기록 부분 프래그먼트"
-        android:visibility="gone"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </TextView>
-
     <CalendarView
         android:id="@+id/record_calendarView"
         android:layout_width="0dp"
@@ -27,91 +14,77 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.8"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.5">
     </CalendarView>
 
-    <ScrollView
-        android:id="@+id/record_list"
+    <LinearLayout
+        android:id="@+id/record_linear_layout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/record_calendarView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/record_calendarView">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
+            android:id="@+id/record_button_linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:weightSum="10"
+            android:gravity="center_horizontal">
 
-            <LinearLayout
-                android:id="@+id/record_eat"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal"
-                android:background="@drawable/setting_background">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:text="사료량 기록 확인"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_gravity="center_vertical">
-                </TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="201dp"
-                    app:srcCompat="?android:attr/listChoiceIndicatorSingle"
-                    android:layout_gravity="center_vertical"></ImageView>
-
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/record_eat_list"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/record_intake_btn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
-            </ListView>
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/main_color"
+                android:text="사료량"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
-            <LinearLayout
-                android:id="@+id/record_color"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal"
-                android:background="@drawable/setting_background">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:text="대소변 색 기록 확인"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_gravity="center_vertical">
-                </TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="180dp"
-                    app:srcCompat="?android:attr/listChoiceIndicatorSingle"
-                    android:layout_gravity="center_vertical"></ImageView>
-
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/record_color_list"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/record_pee_color_btn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
-            </ListView>
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/main_color"
+                android:text="소변색"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <Button
+                android:id="@+id/record_poo_color_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/main_color"
+                android:text="대변색"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         </LinearLayout>
-    </ScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/record_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+            android:visibility="visible"/>
+
+    </LinearLayout>
 
 
 
