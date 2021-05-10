@@ -23,12 +23,16 @@ public class FragmentMainHome extends Fragment {
     TextView main_dog_gender;
     TextView main_dog_type;
     TextView main_dog_weight;
-
-    // 내부 DB 데이터 이름
-    //String loadSharedName = "dog_info";
+    TextView dog_status_info;
+    TextView dog_status_info_time;
 
     // 메인 액티비티에서 GET 요청을 통해 회원가입 데이터 받아오기
     Bundle home_bundle;
+
+    // SharedPreferences를 통해 fcm body 데이터 가져오기
+    String loadSharedName = "FCM_DB";
+    String fcm_body = "";
+    String fcm_time = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,11 +45,13 @@ public class FragmentMainHome extends Fragment {
         main_dog_gender = view.findViewById(R.id.main_dog_gender);
         main_dog_type = view.findViewById(R.id.main_dog_kind);
         main_dog_weight = view.findViewById(R.id.main_dog_weight);
+        //dog_status_info = view.findViewById(R.id.dog_status_info);
+       // dog_status_info_time = view.findViewById(R.id.dog_status_info_time);
 
         home_bundle = getArguments();
         Log.d("hyeals_bundle_fragment", "프래그먼트 실행");
 
-        if(home_bundle != null){
+        if(home_bundle != null) {
             Log.d("hyeals_bundle_fragment", "여기 실행");
             Log.d("hyeals_bundle_fragment", home_bundle.getString("dog_name"));
             main_dog_name.setText("이름: " + home_bundle.getString("dog_name"));
@@ -56,5 +62,21 @@ public class FragmentMainHome extends Fragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SharedPreferences loadShared = this.getActivity().getSharedPreferences(loadSharedName, Context.MODE_PRIVATE);
+        fcm_body = loadShared.getString("fcm_body", "");
+        fcm_time = loadShared.getString("fcm_time", "");
+
+        Log.d("fcm_body", "fcm body: " + fcm_body);
+
+        if(!fcm_body.equals("")){
+            dog_status_info.setText(fcm_body);
+            dog_status_info_time.setText(fcm_time);
+        }
     }
 }

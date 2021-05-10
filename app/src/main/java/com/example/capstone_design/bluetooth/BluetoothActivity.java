@@ -217,7 +217,7 @@ public class BluetoothActivity extends AppCompatActivity {
                 }
 
                 if(connectedThread!=null){
-                    connectedThread.write(uid + "/" + wifi_name + "/" + wifi_pwd);
+                    connectedThread.write("from_app/" + uid + "/" + wifi_name + "/" + wifi_pwd);
                     Log.d(TAG, " [데이터 보냄] " + "디바이스 이름: " + device.getName() + "/ 디바이스 UUID: "  + device.getUuids() + "/ UID: " + uid + "/ WIFI NAME: " + wifi_name + "/ WIFI PWD: " + wifi_pwd);
                 }
             }

@@ -123,24 +123,51 @@
         app:layout_constraintHeight_percent="0.04">
     </TextView>
 
+    <!--
 
+    <TextView
+        android:id="@+id/dog_status_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="반려 동물 건강 상태"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/main_dog_weight"
+        app:layout_constraintBottom_toTopOf="@id/dog_status_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </TextView>
 
     <TextView
         android:id="@+id/dog_status_info"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="30dp"
         android:gravity="center"
-        android:text="반려동물 상태 알림?"
+        android:text="반려동물의 건강상태가 양호합니다."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_dog_weight"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/dog_status_info_title"></TextView>
 
+    <TextView
+        android:id="@+id/dog_status_info_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintTop_toBottomOf="@id/dog_status_info"
+        app:layout_constraintEnd_toEndOf="parent">
+    </TextView>
+
+-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,14 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.capstone_design.fcm.FcmData;
-import com.example.capstone_design.fcm.FcmRetrofitAPI;
-import com.example.capstone_design.initInfo.InfoPost;
-import com.example.capstone_design.initInfo.InitRetofitAPI;
+import com.example.capstone_design.retrofit.Data;
+import com.example.capstone_design.retrofit.RetrofitClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,16 +21,10 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.HashMap;
-import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,14 +34,15 @@ public class MainActivity extends AppCompatActivity {
     private String TAG_RECORD_FRAGMENT = "Fragment_record";
     private String TAG_SETTING_FRAGMENT = "Fragment_setting";
 
+    String saveSharedName = "FCM_DB";
+    String saveKey = "fcm_body";
+
     FragmentMainHome fragmentMainHome = new FragmentMainHome();
     FragmentGuide fragmentGuide = new FragmentGuide();
     FragmentRecord fragmentRecord = new FragmentRecord();
     FragmentSetting fragmentSetting = new FragmentSetting();
 
-
-    InitRetofitAPI initRetofitAPI;
-    FcmRetrofitAPI fcmRetrofitAPI;
+    RetrofitClient retrofitClient = new RetrofitClient();
 
     String uid;
     String fcm_token;
@@ -62,32 +56,30 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
 
+        // fcm_body 값("") dummy로 하나 넣어놓기
+//        SharedPreferences saveShared = getSharedPreferences(saveSharedName, MODE_PRIVATE);
+//        SharedPreferences.Editor sharedEditor = saveShared.edit();
+//        sharedEditor.putString("fcm_body", "");
+//        sharedEditor.putString("fcm_time","");
+//        sharedEditor.commit();
 
         //uid 가져오기
         Intent get_uid_intent = getIntent();
         uid = get_uid_intent.getStringExtra("uid");
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://13.209.18.94:3000") // 주소값 중에 바뀌지 않는 고정값
-                .addConverterFactory(GsonConverterFactory.create()) // gson으로 converter를 생성 => gson은 JSON을 자바 클래스로 바꾸는데 사용됨
-                .build();
-        initRetofitAPI = retrofit.create(InitRetofitAPI.class); // 인터페이스 생성
-        fcmRetrofitAPI = retrofit.create(FcmRetrofitAPI.class);
-
 
         // 파이버베이스로부터 FCM 토큰 받아오고 서버로 받아온 토큰 POST 하는 함수 ----
         getToken();
         //---------------------------------------------------------------------------
 
         // GET 요청
-        initRetofitAPI.getData(uid).enqueue(new Callback<InfoPost>() {
+        retrofitClient.retrofitGetAPI.getUser(uid).enqueue(new Callback<Data>() {
             @Override
-            public void onResponse(Call<InfoPost> call, Response<InfoPost> response) {
+            public void onResponse(Call<Data> call, Response<Data> response) {
                 if(response.isSuccessful()){
-                    InfoPost data = response.body();
-                    // 홈 프래그먼트로 보낼 데이터들
+                    Data data = response.body();
 
                     Log.d("hyeals_bundle", data.getDog_name());
+
                     name = data.getDog_name();
                     birth = data.getDog_birth();
                     gender = data.getDog_gender();
@@ -99,11 +91,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<InfoPost> call, Throwable t) {
-                    t.printStackTrace();
+            public void onFailure(Call<Data> call, Throwable t) {
+                t.printStackTrace();
             }
         });
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -224,19 +215,21 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("fcm_token", fcm_token);
                 Log.d("fcm_uid", uid);
 
-                fcmRetrofitAPI.postData(uid, input).enqueue(new Callback<FcmData>() {
+                retrofitClient.retrofitPostAPI.postAlarm(uid, input).enqueue(new Callback<Data>() {
                     @Override
-                    public void onResponse(Call<FcmData> call, Response<FcmData> response) {
+                    public void onResponse(Call<Data> call, Response<Data> response) {
                         Log.d("fcm_post", "fcm 토큰 서버에 전송 완료: " + fcm_token);
                     }
 
                     @Override
-                    public void onFailure(Call<FcmData> call, Throwable t) {
+                    public void onFailure(Call<Data> call, Throwable t) {
                         t.printStackTrace();
                     }
                 });
+
             }
         });
             return;
     }
+
 }

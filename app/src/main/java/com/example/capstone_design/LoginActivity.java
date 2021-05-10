@@ -15,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.capstone_design.bluetooth.BluetoothActivity;
-import com.example.capstone_design.login.LoginRetrofitAPI;
-import com.example.capstone_design.login.Post;
+import com.example.capstone_design.retrofit.Data;
+import com.example.capstone_design.retrofit.RetrofitClient;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
     // [END declare_auth]
     private FirebaseUser user;
 
-    private LoginRetrofitAPI login_retrofitAPI;
+    RetrofitClient retrofitClient = new RetrofitClient();
 
     Intent uid_send_intent;
 
@@ -98,36 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
 
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
-
-        // okhttp 로그 찍기
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(2, TimeUnit.MINUTES)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .protocols(listOf(Protocol.HTTP_1_1))
-                .addInterceptor(loggingInterceptor).build();
-
-        // 서버와 통신시 필요
-        Retrofit retrofit = new Retrofit.Builder()
-                       .baseUrl("http://13.209.18.94:3000") // 주소값 중에 바뀌지 않는 고정값
-                       .addConverterFactory(GsonConverterFactory.create()) // gson으로 converter를 생성 => gson은 JSON을 자바 클래스로 바꾸는데 사용됨
-                       .build();
-                login_retrofitAPI = retrofit.create(LoginRetrofitAPI.class); // 인터페이스 생성
-
 
         // 구글 로그인 버튼
         google_login_btn.setOnClickListener(new View.OnClickListener() {
@@ -206,22 +181,18 @@ public class LoginActivity extends AppCompatActivity {
 
                 try{
 
-                    login_retrofitAPI.postData(input).enqueue(new Callback<Post>() {
+                    retrofitClient.retrofitPostAPI.postLogin(input).enqueue(new Callback<Data>() {
                         @Override
-                        public void onResponse(Call<Post> call, Response<Post> response) {
+                        public void onResponse(Call<Data> call, Response<Data> response) {
                             if(response.isSuccessful()){
-                                Post data = response.body();
-
-                                Log.d(TAG, data.getNext());
+                                Data data = response.body();
 
                                 if(data.getNext().equals("signup")){
-
                                     Intent intent_init = new Intent(getApplicationContext(), InitInfo.class);
                                     intent_init.putExtra("uid", uid);
                                     startActivity(intent_init);
                                     finish();
-
-                                }else if(data.getNext().equals("login")){
+                                }else{
                                     Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);
                                     intent_main.putExtra("uid", uid);
                                     startActivity(intent_main);
@@ -231,11 +202,11 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Post> call, Throwable t) {
+                        public void onFailure(Call<Data> call, Throwable t) {
                             t.printStackTrace();
-                            t.getMessage();
                         }
                     });
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }

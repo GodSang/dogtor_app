@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstone_design.R;
-import com.example.capstone_design.record.Data;
+import com.example.capstone_design.retrofit.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

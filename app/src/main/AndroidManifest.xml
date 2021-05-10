@@ -19,6 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Capstone_design"
         android:usesCleartextTraffic="true">
+
+        <service android:name=".fcm.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/notification_channel_id"></meta-data>
+
         <activity android:name=".fcm.FcmSettingActivity"></activity>
         <activity android:name=".EditInfoActivity" />
         <activity android:name=".bluetooth.BluetoothActivity" />
@@ -33,12 +44,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-
-        <service android:name=".fcm.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
     </application>
 
 </manifest>

@@ -10,10 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.capstone_design.initInfo.InfoPost;
-import com.example.capstone_design.initInfo.InitRetofitAPI;
-import com.example.capstone_design.login.LoginRetrofitAPI;
-import com.example.capstone_design.login.Post;
+import com.example.capstone_design.retrofit.Data;
+import com.example.capstone_design.retrofit.RetrofitClient;
 
 import java.util.HashMap;
 import java.util.function.ToDoubleBiFunction;
@@ -37,7 +35,7 @@ public class InitInfo extends AppCompatActivity {
     EditText dog_type_ed;
     EditText dog_weight_ed;
 
-    private InitRetofitAPI initRetofitAPI;
+    RetrofitClient retrofitClient = new RetrofitClient();
 
     //String saveSharedName= "dog_info";
 
@@ -57,12 +55,6 @@ public class InitInfo extends AppCompatActivity {
         dog_type_ed = findViewById(R.id.dog_kind); // dog_type // String
         dog_weight_ed = findViewById(R.id.dog_weight); // dog_weight // integer
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://13.209.18.94:3000") // 주소값 중에 바뀌지 않는 고정값
-                .addConverterFactory(GsonConverterFactory.create()) // gson으로 converter를 생성 => gson은 JSON을 자바 클래스로 바꾸는데 사용됨
-                .build();
-        initRetofitAPI = retrofit.create(InitRetofitAPI.class); // 인터페이스 생성
-
         dog_service_start.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,12 +69,12 @@ public class InitInfo extends AppCompatActivity {
                 input.put("dog_type", dog_type_ed.getText().toString());
                 input.put("dog_weight", Integer.parseInt(dog_weight_ed.getText().toString()));
 
-                initRetofitAPI.postData(input).enqueue(new Callback<InfoPost>() {
+                retrofitClient.retrofitPostAPI.postUser(input).enqueue(new Callback<Data>() {
                     @Override
-                    public void onResponse(Call<InfoPost> call, Response<InfoPost> response) {
+                    public void onResponse(Call<Data> call, Response<Data> response) {
                         if(response.isSuccessful()){
-                            InfoPost data = response.body();
-                            
+                            Data data = response.body();
+
                             intent_main = new Intent(getApplicationContext(), MainActivity.class);
                             intent_main.putExtra("uid", uid);
 
@@ -93,11 +85,11 @@ public class InitInfo extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<InfoPost> call, Throwable t) {
+                    public void onFailure(Call<Data> call, Throwable t) {
                         t.printStackTrace();
-                        t.getMessage();
                     }
                 });
+
             }
         });
 

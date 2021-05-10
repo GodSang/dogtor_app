@@ -18,15 +18,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 
-import com.example.capstone_design.initInfo.InfoPost;
-import com.example.capstone_design.initInfo.InitRetofitAPI;
-import com.example.capstone_design.record.Data;
-import com.example.capstone_design.record.GetData;
-import com.example.capstone_design.record.RecordIntakeRetrofitAPI;
-import com.example.capstone_design.record.RecordPeeRetrofitAPI;
-import com.example.capstone_design.record.RecordPooRetrofitAPI;
 import com.example.capstone_design.recyclerview.RecyclerViewAdapter;
+import com.example.capstone_design.retrofit.Data;
+import com.example.capstone_design.retrofit.RecyclerViewData;
+import com.example.capstone_design.retrofit.RetrofitClient;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -64,10 +61,9 @@ public class FragmentRecord extends Fragment {
     String TAG = "";
 
     // 레트로핏 통신 API
+    RetrofitClient retrofitClient = new RetrofitClient();
+
     Retrofit retrofit;
-    private RecordIntakeRetrofitAPI recordIntakeRetrofitAPI;
-    private RecordPeeRetrofitAPI recordPeeRetrofitAPI;
-    private RecordPooRetrofitAPI recordPooRetrofitAPI;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,10 +88,10 @@ public class FragmentRecord extends Fragment {
             uid = bundle_record.getString("uid");
         }
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://13.209.18.94:3000")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        // 오늘 날짜 자동 선택
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+        selected_date = format.format(Calendar.getInstance().getTime());
+        Log.d("TAG_TEST", selected_date);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -216,27 +212,26 @@ public class FragmentRecord extends Fragment {
         }, 1000);
     }
 
-    private void getIntake(){
+    private void getIntake() {
 
-        recordIntakeRetrofitAPI = retrofit.create(RecordIntakeRetrofitAPI.class);
+        //recordIntakeRetrofitAPI = retrofit.create(RecordIntakeRetrofitAPI.class);
 
-        recordIntakeRetrofitAPI.getData(uid, intake_page, limit, selected_date).enqueue(new Callback<GetData>() {
+        retrofitClient.retrofitGetAPI.getIntake(uid, intake_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override
-            public void onResponse(Call<GetData> call, Response<GetData> response) {
-
-                GetData data = response.body();
+            public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
+                RecyclerViewData data = response.body();
 
                 get_record_data_list = data.getRows();
 
                 // 리사이클러뷰에서 사용할 리스트에 GET으로 받아온 리스트 대입
-                for(Data item: get_record_data_list){
+                for (Data item : get_record_data_list) {
                     record_list.add(item);
                 }
                 adapter.notifyDataSetChanged();
-
             }
+
             @Override
-            public void onFailure(Call<GetData> call, Throwable t) {
+            public void onFailure(Call<RecyclerViewData> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -244,13 +239,12 @@ public class FragmentRecord extends Fragment {
 
     private void getPee(){
 
-        recordPeeRetrofitAPI = retrofit.create(RecordPeeRetrofitAPI.class);
+       // recordPeeRetrofitAPI = retrofit.create(RecordPeeRetrofitAPI.class);
 
-        recordPeeRetrofitAPI.getData(uid, pee_page, limit, selected_date).enqueue(new Callback<GetData>() {
+        retrofitClient.retrofitGetAPI.getPee(uid, pee_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override
-            public void onResponse(Call<GetData> call, Response<GetData> response) {
-
-                GetData data = response.body();
+            public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
+                RecyclerViewData data = response.body();
 
                 get_record_data_list = data.getRows();
 
@@ -261,24 +255,24 @@ public class FragmentRecord extends Fragment {
                     Log.d("TAG_TEST", record_list.get(0).getRGB());
                 }
                 adapter.notifyDataSetChanged();
-
             }
+
             @Override
-            public void onFailure(Call<GetData> call, Throwable t) {
+            public void onFailure(Call<RecyclerViewData> call, Throwable t) {
                 t.printStackTrace();
             }
         });
+
     }
 
     private void getPoo(){
 
-        recordPooRetrofitAPI = retrofit.create(RecordPooRetrofitAPI.class);
+        //recordPooRetrofitAPI = retrofit.create(RecordPooRetrofitAPI.class);
 
-        recordPooRetrofitAPI.getData(uid, poo_page, limit, selected_date).enqueue(new Callback<GetData>() {
+        retrofitClient.retrofitGetAPI.getPoo(uid, poo_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override
-            public void onResponse(Call<GetData> call, Response<GetData> response) {
-
-                GetData data = response.body();
+            public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
+                RecyclerViewData data = response.body();
 
                 get_record_data_list = data.getRows();
 
@@ -288,8 +282,9 @@ public class FragmentRecord extends Fragment {
                 }
                 adapter.notifyDataSetChanged();
             }
+
             @Override
-            public void onFailure(Call<GetData> call, Throwable t) {
+            public void onFailure(Call<RecyclerViewData> call, Throwable t) {
                 t.printStackTrace();
             }
         });

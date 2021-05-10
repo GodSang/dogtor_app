@@ -13,6 +13,8 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -23,9 +25,4 @@ public class LoadingActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
-    protected void onDestroy() {
-        handler.removeCallbacks(runnable);
-        super.onDestroy();
-    }*/
 }

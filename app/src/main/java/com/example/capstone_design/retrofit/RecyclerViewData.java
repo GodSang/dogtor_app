@@ -1,11 +1,11 @@
-package com.example.capstone_design.record;
+package com.example.capstone_design.retrofit;
 
+import com.example.capstone_design.record.Data;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
 import java.util.List;
 
-public class GetData {
+public class RecyclerViewData {
     @SerializedName("count")
     private int count;
     @SerializedName("rows")
@@ -20,7 +20,7 @@ public class GetData {
         return count;
     }
 
-    public void setRows(List<Data> rows) {
+    public void setRows(List<com.example.capstone_design.record.Data> rows) {
         this.rows = rows;
     }
 
