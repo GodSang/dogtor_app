@@ -1,8 +1,5 @@
 package com.example.capstone_design.retrofit;
 
-import com.example.capstone_design.initInfo.InfoPost;
-import com.example.capstone_design.record.GetData;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

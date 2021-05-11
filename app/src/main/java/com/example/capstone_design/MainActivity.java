@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private String TAG_GUIDE_FRAGMENT = "Fragment_guide";
     private String TAG_RECORD_FRAGMENT = "Fragment_record";
     private String TAG_SETTING_FRAGMENT = "Fragment_setting";
+    private String TAG_WEIGHT_FRAGMENT = "Fragment_weight";
 
     String saveSharedName = "FCM_DB";
     String saveKey = "fcm_body";
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentGuide fragmentGuide = new FragmentGuide();
     FragmentRecord fragmentRecord = new FragmentRecord();
     FragmentSetting fragmentSetting = new FragmentSetting();
+    FragmentWeight fragmentWeight =  new FragmentWeight();
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
@@ -112,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.setting:
                         FragmentView(TAG_SETTING_FRAGMENT, fragmentSetting);
                         break;
+                    case R.id.weight:
+                        FragmentView(TAG_WEIGHT_FRAGMENT, fragmentWeight);
                 }
 
                 return true;
@@ -155,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment guide = manager.findFragmentByTag(TAG_GUIDE_FRAGMENT);
         Fragment record = manager.findFragmentByTag(TAG_RECORD_FRAGMENT);
         Fragment setting = manager.findFragmentByTag(TAG_SETTING_FRAGMENT);
+        Fragment weight = manager.findFragmentByTag(TAG_WEIGHT_FRAGMENT);
 
         // Hide all Fragment
         if(main_home != null){
@@ -168,6 +173,9 @@ public class MainActivity extends AppCompatActivity {
         }
         if(setting != null){
             transaction.hide(setting);
+        }
+        if(weight != null){
+            transaction.hide(weight);
         }
 
         //Show current Fragment
@@ -189,6 +197,11 @@ public class MainActivity extends AppCompatActivity {
         if(tag == TAG_SETTING_FRAGMENT){
             if(setting!=null){
                 transaction.show(setting);
+            }
+        }
+        if(tag == TAG_WEIGHT_FRAGMENT){
+            if(weight!=null){
+                transaction.show(weight);
             }
         }
 

@@ -18,6 +18,11 @@
         android:title="기록"
         app:showAsAction="always" />
     <item
+        android:id="@+id/weight"
+        android:icon="?android:attr/alertDialogIcon"
+        android:title="체지방"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/setting"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="설정"

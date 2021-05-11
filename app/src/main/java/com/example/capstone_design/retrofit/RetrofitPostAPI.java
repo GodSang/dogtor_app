@@ -1,9 +1,5 @@
 package com.example.capstone_design.retrofit;
 
-import com.example.capstone_design.fcm.FcmData;
-import com.example.capstone_design.initInfo.InfoPost;
-import com.example.capstone_design.login.Post;
-
 import java.util.HashMap;
 
 import retrofit2.Call;
