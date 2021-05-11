@@ -2,9 +2,8 @@ package com.example.capstone_design.fcm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +21,6 @@ import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FcmSettingActivity extends AppCompatActivity {
 
@@ -32,6 +29,11 @@ public class FcmSettingActivity extends AppCompatActivity {
 
     String uid;
     RetrofitClient retrofitClient = new RetrofitClient();
+
+    SharedPreferences saveShared = getSharedPreferences("fcm_option", MODE_PRIVATE);
+    SharedPreferences.Editor sharedEditor = saveShared.edit();
+
+    SharedPreferences loadShared = getSharedPreferences("fcm_option", MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,9 @@ public class FcmSettingActivity extends AppCompatActivity {
         Intent get_uid_intent = getIntent();
         uid = get_uid_intent.getStringExtra("uid");
 
-        //switch 디폴트 설정: 알림 켜진 상태
-        fcm_on_off_switch.setChecked(true);
+        //switch 내부 DB(SharedPreferences에 option키 값에 value있으면 그걸로 option, 없으면 on이 디폴트
+        fcm_on_off_switch.setChecked(loadShared.getBoolean("option", true));
+        Log.d("FcmSettingActivity", "내부 DB 옵션 값: " + loadShared.getBoolean("option", false));
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +65,15 @@ public class FcmSettingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     sendFcmOptionToServer(1);
-                    Log.d("FcmSettingActivity", "옵션 체크 상태: ON");
+                    sharedEditor.putBoolean("option", true);
+                    sharedEditor.commit();
+                    Log.d("FcmSettingActivity", "내부 DB 옵션 값: " + loadShared.getBoolean("option", false));
+                    Log.d("FcmSettingActivity", "옵션 체크 상태: OFF");
                 }else{
                     sendFcmOptionToServer(0);
+                    sharedEditor.putBoolean("option", false);
+                    sharedEditor.commit();
+                    Log.d("FcmSettingActivity", "내부 DB 옵션 값: " + loadShared.getBoolean("option", true));
                     Log.d("FcmSettingActivity", "옵션 체크 상태: OFF");
                 }
             }
