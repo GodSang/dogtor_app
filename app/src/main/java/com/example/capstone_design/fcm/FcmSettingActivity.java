@@ -27,25 +27,23 @@ public class FcmSettingActivity extends AppCompatActivity {
     ImageView back_btn;
     Switch fcm_on_off_switch;
 
-    String uid;
+    String token;
     RetrofitClient retrofitClient = new RetrofitClient();
-
-    SharedPreferences saveShared = getSharedPreferences("fcm_option", MODE_PRIVATE);
-    SharedPreferences.Editor sharedEditor = saveShared.edit();
-
-    SharedPreferences loadShared = getSharedPreferences("fcm_option", MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fcm_setting);
 
+        SharedPreferences saveShared = getSharedPreferences("DB", MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = saveShared.edit();
+
+        SharedPreferences loadShared = getSharedPreferences("DB", MODE_PRIVATE);
+
         back_btn = findViewById(R.id.back_btn);
         fcm_on_off_switch = findViewById(R.id.fcm_on_off_switch);
 
-        // uid 가져오기
-        Intent get_uid_intent = getIntent();
-        uid = get_uid_intent.getStringExtra("uid");
+        token = loadShared.getString("token", "");
 
         //switch 내부 DB(SharedPreferences에 option키 값에 value있으면 그걸로 option, 없으면 on이 디폴트
         fcm_on_off_switch.setChecked(loadShared.getBoolean("option", true));
@@ -85,10 +83,10 @@ public class FcmSettingActivity extends AppCompatActivity {
 
         input.put("optionFlag", OptionFlag);
 
-        retrofitClient.retrofitPostAPI.postAlarmOption(uid, input).enqueue(new Callback<Data>() {
+        retrofitClient.retrofitPostAPI.postAlarmOption(token, input).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
-                Log.d("FcmSettingActivity", "데이터 보내기 성공! uid: "+ uid + "OptionFlag: " + OptionFlag);
+                Log.d("FcmSettingActivity", "데이터 보내기 성공! uid: "+ token + "OptionFlag: " + OptionFlag);
             }
 
             @Override

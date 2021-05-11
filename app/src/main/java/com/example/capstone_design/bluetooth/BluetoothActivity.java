@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ParcelUuid;
 import android.util.Log;
@@ -39,7 +40,7 @@ import java.util.UUID;
 
 /*
 * 앱 -> 라즈베리파이 전송 데이터
-* 1. 사용자 uid
+* 1. 사용자 uid(JWT token)
 * 2. 와이파이 이름
 * 3. 와이파이 비밀번호
 * */
@@ -68,9 +69,6 @@ public class BluetoothActivity extends AppCompatActivity {
     String TAG = "HYEALS";
     UUID BT_MODULE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // 라즈베리파이/아두이노-안드로이드 블루투스 통신 프로토콜(SerialPortServiceClass_UUID)
 
-    // 디바이스 uuid 기본값
-    UUID device_uuid = UUID.fromString("00001132-0000-1000-8000-00805f9b34fb");
-    UUID deviceN_uuid = UUID.fromString("00001133-0000-1000-8000-00805f9b34fb");
 
     // 디바이스와 연결할 때 사용
     private String name=""; // 디바이스 이름
@@ -81,8 +79,10 @@ public class BluetoothActivity extends AppCompatActivity {
     // 해결 방안 -> flag값을 세워서 스캔 버튼을 눌렀을 때의 flag값일 때만 unregisterReceiver가 동작하도록 함
     private boolean bc_flag;
 
+    SharedPreferences loadShared = getSharedPreferences("DB", MODE_PRIVATE);
+
     // 라즈베리파이에 전송할 데이터
-    String uid;
+    String token;
     String wifi_name;
     String wifi_pwd;
 
@@ -98,6 +98,8 @@ public class BluetoothActivity extends AppCompatActivity {
         scaned_bluetooth_list = findViewById(R.id.scaned_bluetooth_list);
         register_device_btn = findViewById(R.id.register_device_btn);
 
+        SharedPreferences loadShared = getSharedPreferences("DB", MODE_PRIVATE);
+
         // 뒤로가기 버튼
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,11 +111,7 @@ public class BluetoothActivity extends AppCompatActivity {
             }
         });
 
-         //uid 가져오기
-        Intent get_uid_intent = getIntent();
-        uid = get_uid_intent.getStringExtra("uid");
-
-        Log.d(TAG, "UID: " + uid);
+        token = loadShared.getString("token", "");
 
         // 블루투스 활성화
         btAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -198,7 +196,7 @@ public class BluetoothActivity extends AppCompatActivity {
                 device = btAdapter.getRemoteDevice(address);
 
                 Log.d(TAG, "name: " + name + "/" + "address: " + address);
-                Log.d(TAG, uid + "/" + wifi_name + "/" + wifi_pwd);
+                Log.d(TAG, token + "/" + wifi_name + "/" + wifi_pwd);
 
                 // 소켓 생성 및 연결
                 try{
@@ -217,8 +215,8 @@ public class BluetoothActivity extends AppCompatActivity {
                 }
 
                 if(connectedThread!=null){
-                    connectedThread.write("from_app/" + uid + "/" + wifi_name + "/" + wifi_pwd);
-                    Log.d(TAG, " [데이터 보냄] " + "디바이스 이름: " + device.getName() + "/ 디바이스 UUID: "  + device.getUuids() + "/ UID: " + uid + "/ WIFI NAME: " + wifi_name + "/ WIFI PWD: " + wifi_pwd);
+                    connectedThread.write("from_app/" + token + "/" + wifi_name + "/" + wifi_pwd);
+                    Log.d(TAG, " [데이터 보냄] " + "디바이스 이름: " + device.getName() + "/ 디바이스 UUID: "  + device.getUuids() + "/ UID: " + token + "/ WIFI NAME: " + wifi_name + "/ WIFI PWD: " + wifi_pwd);
                 }
             }
         });

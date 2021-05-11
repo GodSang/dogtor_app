@@ -3,8 +3,10 @@ package com.example.capstone_design;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.capstone_design.retrofit.Data;
+import com.example.capstone_design.retrofit.RetrofitClient;
+
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditInfoActivity extends AppCompatActivity {
 
@@ -22,6 +32,7 @@ public class EditInfoActivity extends AppCompatActivity {
     private EditText edit_dog_age;
     private EditText edit_dog_gender;
     private EditText edit_dog_type;
+    private EditText edit_dog_weight;
     private Button edit_profile_finish_btn;
 
     private CircleImageView profile_image1;
@@ -29,20 +40,63 @@ public class EditInfoActivity extends AppCompatActivity {
     private CircleImageView profile_image3;
     private CircleImageView selected_profile_image;
 
-    String profile_image_tag = "1";
+    int profile_image_tag = 1;
 
+    String token;
+
+    RetrofitClient retrofitClient = new RetrofitClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_info);
 
+        SharedPreferences saveShared = this.getSharedPreferences("DB", Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = saveShared.edit();
+
+        SharedPreferences loadShared = getSharedPreferences("DB", MODE_PRIVATE);
+
         back_btn = findViewById(R.id.back_btn);
+        edit_profile_image = findViewById(R.id.edit_profile_image);
         edit_dog_name = findViewById(R.id.edit_dog_name);
         edit_dog_age = findViewById(R.id.edit_dog_age);
         edit_dog_gender = findViewById(R.id.edit_dog_gender);
         edit_dog_type = findViewById(R.id.edit_dog_type);
+        edit_dog_weight = findViewById(R.id.edit_dog_weight);
         edit_profile_finish_btn = findViewById(R.id.edit_profile_finish_btn);
+
+        token = loadShared.getString("token", "");
+
+        retrofitClient.retrofitGetAPI.getUser(token).enqueue(new Callback<Data>() {
+            @Override
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                Data data = response.body();
+
+                switch (data.getDog_iamge()){
+                    case 1:
+                        edit_profile_image.setImageResource(R.drawable.dog_profile_1);
+                        break;
+                    case 2:
+                        edit_profile_image.setImageResource(R.drawable.dog_profile_2);
+                        break;
+                    case 3:
+                        edit_profile_image.setImageResource(R.drawable.dog_profile_3);
+                        break;
+                }
+
+                edit_dog_name.setText(data.getDog_name());
+                edit_dog_age.setText(String.valueOf(data.getDog_birth()));
+                edit_dog_gender.setText(data.getDog_gender());
+                edit_dog_type.setText(data.getDog_type());
+                edit_dog_weight.setText(String.valueOf(data.getDog_weight()));
+
+            }
+
+            @Override
+            public void onFailure(Call<Data> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +109,30 @@ public class EditInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                HashMap<String, Object> input = new HashMap<>();
+
+                input.put("uid", token);
+                input.put("dog_name", edit_dog_name.getText().toString());
+                input.put("dog_birth", Integer.parseInt(edit_dog_age.getText().toString()));
+                input.put("dog_gender", edit_dog_gender.getText().toString());
+                input.put("dog_type", edit_dog_type.getText().toString());
+                input.put("dog_weight", Integer.parseInt(edit_dog_weight.getText().toString()));
+                input.put("dog_image", profile_image_tag);
+
+                sharedEditor.putInt("profile_image", profile_image_tag);
+                sharedEditor.commit();
+
+               retrofitClient.retrofitPostAPI.postUserUpdate(token, input).enqueue(new Callback<Data>() {
+                   @Override
+                   public void onResponse(Call<Data> call, Response<Data> response) {
+                       finish();
+                   }
+
+                   @Override
+                   public void onFailure(Call<Data> call, Throwable t) {
+                       t.printStackTrace();
+                   }
+               });
             }
         });
 
@@ -74,7 +152,7 @@ public class EditInfoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         selected_profile_image.setImageResource(R.drawable.dog_profile_1);
-                        profile_image_tag = "1";
+                        profile_image_tag = 1;
                     }
                 });
 
@@ -82,7 +160,7 @@ public class EditInfoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         selected_profile_image.setImageResource(R.drawable.dog_profile_2);
-                        profile_image_tag = "2";
+                        profile_image_tag = 2;
                     }
                 });
 
@@ -90,7 +168,7 @@ public class EditInfoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         selected_profile_image.setImageResource(R.drawable.dog_profile_3);
-                        profile_image_tag = "3";
+                        profile_image_tag = 3;
                     }
                 });
 
@@ -102,13 +180,13 @@ public class EditInfoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (profile_image_tag){
-                            case "1":
+                            case 1:
                                 edit_profile_image.setImageResource(R.drawable.dog_profile_1);
                                 break;
-                            case "2":
+                            case 2:
                                 edit_profile_image.setImageResource(R.drawable.dog_profile_2);
                                 break;
-                            case "3":
+                            case 3:
                                 edit_profile_image.setImageResource(R.drawable.dog_profile_3);
                                 break;
                         }

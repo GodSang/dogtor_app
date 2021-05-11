@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private String TAG_SETTING_FRAGMENT = "Fragment_setting";
     private String TAG_WEIGHT_FRAGMENT = "Fragment_weight";
 
-    String saveSharedName = "FCM_DB";
-    String saveKey = "fcm_body";
+    private String token;
 
     FragmentMainHome fragmentMainHome = new FragmentMainHome();
     FragmentGuide fragmentGuide = new FragmentGuide();
@@ -46,42 +45,34 @@ public class MainActivity extends AppCompatActivity {
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
-    String uid;
     String fcm_token;
     String name, gender, type;
-    int birth, weight;
+    int birth, weight, image_tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences loadShared = getSharedPreferences("DB", MODE_PRIVATE);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
 
-        // fcm_body 값("") dummy로 하나 넣어놓기
-//        SharedPreferences saveShared = getSharedPreferences(saveSharedName, MODE_PRIVATE);
-//        SharedPreferences.Editor sharedEditor = saveShared.edit();
-//        sharedEditor.putString("fcm_body", "");
-//        sharedEditor.putString("fcm_time","");
-//        sharedEditor.commit();
-
-        //uid 가져오기
-        Intent get_uid_intent = getIntent();
-        uid = get_uid_intent.getStringExtra("uid");
+        token = loadShared.getString("token", "");
 
         // 파이버베이스로부터 FCM 토큰 받아오고 서버로 받아온 토큰 POST 하는 함수 ----
         getToken();
         //---------------------------------------------------------------------------
 
         // GET 요청
-        retrofitClient.retrofitGetAPI.getUser(uid).enqueue(new Callback<Data>() {
+        retrofitClient.retrofitGetAPI.getUser(token).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
                 if(response.isSuccessful()){
                     Data data = response.body();
 
                     Log.d("hyeals_bundle", data.getDog_name());
-
+                    image_tag = data.getDog_iamge();
                     name = data.getDog_name();
                     birth = data.getDog_birth();
                     gender = data.getDog_gender();
@@ -131,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         if(manager.findFragmentByTag(tag)==null){
             if(tag == TAG_HOME_FRAGMENT){
                 Bundle home_bundle = new Bundle(5);
+                home_bundle.putInt("dog_image", image_tag);
                 home_bundle.putString("dog_name",name);
                 home_bundle.putInt("dog_birth", birth);
                 home_bundle.putString("dog_gender", gender);
@@ -139,18 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 fragmentMainHome.setArguments(home_bundle);
 
                 Log.d("hyeals_bundle_name", home_bundle.getString("dog_name"));
-            }
-
-            if(tag == TAG_RECORD_FRAGMENT){
-                Bundle bundle_record = new Bundle(1);
-                bundle_record.putString("uid", uid);
-                fragmentRecord.setArguments(bundle_record);
-            }
-
-            if(tag == TAG_SETTING_FRAGMENT){
-                Bundle bundle = new Bundle(1);
-                bundle.putString("uid", uid);
-                fragmentSetting.setArguments(bundle);
             }
             transaction.add(R.id.fragment, fragment, tag);
         }
@@ -226,9 +206,8 @@ public class MainActivity extends AppCompatActivity {
                 HashMap<String, Object> input = new HashMap<>();
                 input.put("key", fcm_token);
                 Log.d("fcm_token", fcm_token);
-                Log.d("fcm_uid", uid);
 
-                retrofitClient.retrofitPostAPI.postAlarm(uid, input).enqueue(new Callback<Data>() {
+                retrofitClient.retrofitPostAPI.postAlarm(token, input).enqueue(new Callback<Data>() {
                     @Override
                     public void onResponse(Call<Data> call, Response<Data> response) {
                         Log.d("fcm_post", "fcm 토큰 서버에 전송 완료: " + fcm_token);

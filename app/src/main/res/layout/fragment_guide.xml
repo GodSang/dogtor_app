@@ -19,9 +19,9 @@
             <LinearLayout
                 android:id="@+id/pee_color_guide_btn"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal"
-                android:background="@drawable/custom_guide_item_background">
+                android:layout_height="70dp"
+                android:background="@drawable/custom_guide_item_background"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="280dp"
+                    android:layout_marginLeft="220dp"
                     app:srcCompat="?android:attr/listChoiceIndicatorSingle"></ImageView>
 
             </LinearLayout>
@@ -49,7 +49,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -57,18 +57,18 @@
                         android:layout_height="0dp"
                         android:src="#feeda5"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="정상"
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -80,7 +80,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -88,20 +88,20 @@
                         android:layout_height="0dp"
                         android:src="#f68f57"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
                         android:text="황달 혹은 소화 기관(간, 쓸개, 이자)에 문제가 있을 확률이 높습니다."
                         android:gravity="center_vertical"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -119,19 +119,19 @@
                         android:layout_height="0dp"
                         android:src="#f4a8e9"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
                         android:text="요로 감염 혹은 염증이 발생했을 확률이 높습니다."
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/black"
@@ -142,7 +142,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -150,18 +150,18 @@
                         android:layout_height="0dp"
                         android:src="#f43b4e"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="요로 감염 혹은 염증이 발생했을 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -173,7 +173,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -181,18 +181,18 @@
                         android:layout_height="0dp"
                         android:src="#85594a"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="근육 손상 혹은 독소 중독이 발생했을 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -204,7 +204,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -212,18 +212,18 @@
                         android:layout_height="0dp"
                         android:src="@color/black"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="근육 손상 혹은 독소 중독이 발생했을 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -238,7 +238,7 @@
             <LinearLayout
                 android:id="@+id/poo_color_guide_btn"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:orientation="horizontal"
                 android:background="@drawable/custom_guide_item_background">
 
@@ -254,7 +254,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="280dp"
+                    android:layout_marginLeft="220dp"
                     android:layout_gravity="center_vertical"
                     app:srcCompat="?android:attr/listChoiceIndicatorSingle"></ImageView>
 
@@ -270,7 +270,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -278,18 +278,18 @@
                         android:layout_height="0dp"
                         android:src="#85594a"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="정상"
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -301,7 +301,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -309,18 +309,18 @@
                         android:layout_height="0dp"
                         android:src="#9a908c"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="췌장 기능에 이상, 외분비 췌장 기능 부전 등의 소화 장애일 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -332,7 +332,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -340,18 +340,18 @@
                         android:layout_height="0dp"
                         android:src="@color/black"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="위장 질환이나 위 궤양 신호일 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -363,7 +363,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -371,18 +371,18 @@
                         android:layout_height="0dp"
                         android:src="#f43b4e"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="소화기관과 특히 위장관에 출혈이 발생했을 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -394,7 +394,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -402,18 +402,18 @@
                         android:layout_height="0dp"
                         android:src="#f68f57"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="섭취한 음식이 충분히 소화가 되지 않았을 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -425,7 +425,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -433,18 +433,18 @@
                         android:layout_height="0dp"
                         android:src="#feeda5"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="특정 음식에 대한 과민증, 간, 담도계에 문제가 있을 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -456,7 +456,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -464,18 +464,18 @@
                         android:layout_height="0dp"
                         android:src="#acea8d"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="담낭에 문제가 생겼을 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -487,7 +487,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:background="@drawable/custom_guide_item_background">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -495,18 +495,18 @@
                         android:layout_height="0dp"
                         android:src="#d68dea"
                         app:layout_constraintDimensionRatio="1"
-                        android:padding="10dp"
+                        android:padding="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.08">
+                        app:layout_constraintHorizontal_bias="0.05">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="250dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="120dp"
+                        android:layout_marginStart="100dp"
                         android:text="출혈성 위장염이 발생했을 확률이 높습니다."
                         android:gravity="center_vertical"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"

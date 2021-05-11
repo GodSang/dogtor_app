@@ -2,6 +2,7 @@ package com.example.capstone_design;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class FragmentSetting extends Fragment {
 
@@ -32,31 +35,44 @@ public class FragmentSetting extends Fragment {
     private TextView setting_bluetooth;
     private TextView setting_alarm;
     private Button logout_btn;
-    Bundle bundle; // uid 값 가져올 bundle
+    private CircleImageView setting_profile_image;
+
     Context mContext;
-    String uid;
+    String token;
+    int profile_image_tag = 1;
     String TAG = "FragmentSetting";
 
     private GoogleSignInClient googleSignInClient;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        SharedPreferences loadShared = this.getActivity().getSharedPreferences("DB", Context.MODE_PRIVATE);
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_setting, container, false);
         setting_change_info = v.findViewById(R.id.setting_change_info);
         setting_bluetooth = v.findViewById(R.id.setting_bluetooth);
         setting_alarm = v.findViewById(R.id.setting_alarm);
         logout_btn = v.findViewById(R.id.logout_btn);
+        setting_profile_image = v.findViewById(R.id.setting_profile_image);
 
-        bundle = getArguments();
+        token = loadShared.getString("token", "");
+        profile_image_tag = loadShared.getInt("profile_image" , 1);
 
-        if(bundle != null){
-            uid = bundle.getString("uid");
+        switch (profile_image_tag){
+            case 1:
+                setting_profile_image.setImageResource(R.drawable.dog_profile_1);
+                break;
+            case 2:
+                setting_profile_image.setImageResource(R.drawable.dog_profile_2);
+                break;
+            case 3:
+                setting_profile_image.setImageResource(R.drawable.dog_profile_3);
+                break;
         }
 
-        Log.d(TAG, "UID: " + uid);
 
         setting_change_info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +87,6 @@ public class FragmentSetting extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), BluetoothActivity.class);
-                intent.putExtra("uid", uid);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
@@ -82,7 +97,6 @@ public class FragmentSetting extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FcmSettingActivity.class);
-                intent.putExtra("uid", uid);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }

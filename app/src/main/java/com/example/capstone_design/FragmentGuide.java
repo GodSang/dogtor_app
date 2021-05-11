@@ -31,10 +31,10 @@ public class FragmentGuide extends Fragment {
         pee_color_guide_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pee_color_guide.getVisibility() == View.INVISIBLE){
+                if(pee_color_guide.getVisibility() == View.GONE){
                     pee_color_guide.setVisibility(View.VISIBLE);
                 }else{
-                    pee_color_guide.setVisibility(View.INVISIBLE);
+                    pee_color_guide.setVisibility(View.GONE);
                 }
             }
         });
@@ -42,10 +42,10 @@ public class FragmentGuide extends Fragment {
         poo_color_guide_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(poo_color_guide.getVisibility() == View.INVISIBLE){
+                if(poo_color_guide.getVisibility() == View.GONE){
                     poo_color_guide.setVisibility(View.VISIBLE);
                 }else{
-                    poo_color_guide.setVisibility(View.INVISIBLE);
+                    poo_color_guide.setVisibility(View.GONE);
                 }
             }
         });

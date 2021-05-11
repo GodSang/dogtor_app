@@ -52,14 +52,8 @@ import static java.lang.Thread.sleep;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText user_ID;
-    EditText user_Password;
-    Button login_btn;
-    TextView sign_up_tv;
     SignInButton google_login_btn;
 
-    String id;
-    String pwd;
     String uid;
 
     private GoogleSignInOptions gso;
@@ -194,7 +188,6 @@ public class LoginActivity extends AppCompatActivity {
                                     finish();
                                 }else{
                                     Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent_main.putExtra("uid", uid);
                                     startActivity(intent_main);
                                     finish();
                                 }

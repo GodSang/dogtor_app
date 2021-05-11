@@ -2,6 +2,7 @@ package com.example.capstone_design;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,8 @@ public class FragmentRecord extends Fragment {
     int pee_page = 0;
     int poo_page = 0;
     int limit = 4; // GET 요청으로 한 페이지 당 받아올 데이터 값
-    String uid; // GET 요청으로 보낼 uid 값
+
+    String token;
 
     List<Data> record_list = new ArrayList<Data>();
     List<Data> get_record_data_list = new ArrayList<Data>();
@@ -69,6 +71,8 @@ public class FragmentRecord extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        SharedPreferences loadShared = this.getActivity().getSharedPreferences("DB", Context.MODE_PRIVATE);
+
         View view = inflater.inflate(R.layout.fragment_record, container, false);
 
         calendarView = view.findViewById(R.id.record_calendarView);
@@ -81,12 +85,7 @@ public class FragmentRecord extends Fragment {
         dummy.setAmountOfMeal(10);
         record_list.add(dummy);
 
-        bundle_record = getArguments();
-
-        // UID 가져오는 부분
-        if(bundle_record != null){
-            uid = bundle_record.getString("uid");
-        }
+        token = loadShared.getString("token", "");
 
         // 오늘 날짜 자동 선택
         SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
@@ -216,7 +215,7 @@ public class FragmentRecord extends Fragment {
 
         //recordIntakeRetrofitAPI = retrofit.create(RecordIntakeRetrofitAPI.class);
 
-        retrofitClient.retrofitGetAPI.getIntake(uid, intake_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
+        retrofitClient.retrofitGetAPI.getIntake(token, intake_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override
             public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
                 RecyclerViewData data = response.body();
@@ -241,7 +240,7 @@ public class FragmentRecord extends Fragment {
 
        // recordPeeRetrofitAPI = retrofit.create(RecordPeeRetrofitAPI.class);
 
-        retrofitClient.retrofitGetAPI.getPee(uid, pee_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
+        retrofitClient.retrofitGetAPI.getPee(token, pee_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override
             public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
                 RecyclerViewData data = response.body();
@@ -269,7 +268,7 @@ public class FragmentRecord extends Fragment {
 
         //recordPooRetrofitAPI = retrofit.create(RecordPooRetrofitAPI.class);
 
-        retrofitClient.retrofitGetAPI.getPoo(uid, poo_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
+        retrofitClient.retrofitGetAPI.getPoo(token, poo_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override
             public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
                 RecyclerViewData data = response.body();

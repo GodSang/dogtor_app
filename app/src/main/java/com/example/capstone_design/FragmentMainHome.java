@@ -16,8 +16,11 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FragmentMainHome extends Fragment {
 
+    CircleImageView main_dog_profile_image;
     TextView main_dog_name;
     TextView main_dog_age;
     TextView main_dog_gender;
@@ -45,6 +48,7 @@ public class FragmentMainHome extends Fragment {
         main_dog_gender = view.findViewById(R.id.main_dog_gender);
         main_dog_type = view.findViewById(R.id.main_dog_kind);
         main_dog_weight = view.findViewById(R.id.main_dog_weight);
+        main_dog_profile_image = view.findViewById(R.id.main_dog_profile_image);
         //dog_status_info = view.findViewById(R.id.dog_status_info);
        // dog_status_info_time = view.findViewById(R.id.dog_status_info_time);
 
@@ -54,6 +58,19 @@ public class FragmentMainHome extends Fragment {
         if(home_bundle != null) {
             Log.d("hyeals_bundle_fragment", "여기 실행");
             Log.d("hyeals_bundle_fragment", home_bundle.getString("dog_name"));
+
+            switch (home_bundle.getInt("dog_image")){
+                case 1:
+                    main_dog_profile_image.setImageResource(R.drawable.dog_profile_1);
+                    break;
+                case 2:
+                    main_dog_profile_image.setImageResource(R.drawable.dog_profile_2);
+                    break;
+                case 3:
+                    main_dog_profile_image.setImageResource(R.drawable.dog_profile_3);
+                    break;
+            }
+
             main_dog_name.setText("이름: " + home_bundle.getString("dog_name"));
             main_dog_age.setText("나이: " + home_bundle.getInt("dog_birth"));
             main_dog_gender.setText("성별: " + home_bundle.getString("dog_gender"));

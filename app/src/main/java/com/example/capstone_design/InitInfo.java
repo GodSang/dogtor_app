@@ -3,6 +3,7 @@ package com.example.capstone_design;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,7 +33,6 @@ public class InitInfo extends AppCompatActivity {
     Intent intent_main;
 
     Button dog_service_start;
-    // TODO: 아직 이미지 선택 처리부분은 안함 (추후  다이얼로그로 할 것)
     CircleImageView dog_image;
     EditText dog_name_ed;
     EditText dog_birth_ed;
@@ -47,7 +47,7 @@ public class InitInfo extends AppCompatActivity {
     private CircleImageView profile_image3;
     private CircleImageView selected_profile_image;
 
-    String profile_image_tag = "1";
+    int profile_image_tag = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,9 @@ public class InitInfo extends AppCompatActivity {
         //uid 가져오기
         Intent get_uid_intent = getIntent();
         uid = get_uid_intent.getStringExtra("uid");
+
+        SharedPreferences saveShared = this.getSharedPreferences("DB", Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = saveShared.edit();
 
         dog_service_start = findViewById(R.id.dog_service_start);
         dog_image = findViewById(R.id.dog_image);
@@ -82,7 +85,7 @@ public class InitInfo extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         selected_profile_image.setImageResource(R.drawable.dog_profile_1);
-                        profile_image_tag = "1";
+                        profile_image_tag = 1;
                     }
                 });
 
@@ -90,7 +93,7 @@ public class InitInfo extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         selected_profile_image.setImageResource(R.drawable.dog_profile_2);
-                        profile_image_tag = "2";
+                        profile_image_tag = 2;
                     }
                 });
 
@@ -98,7 +101,7 @@ public class InitInfo extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         selected_profile_image.setImageResource(R.drawable.dog_profile_3);
-                        profile_image_tag = "3";
+                        profile_image_tag = 3;
                     }
                 });
 
@@ -112,13 +115,13 @@ public class InitInfo extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (profile_image_tag){
-                            case "1":
+                            case 1:
                                 dog_image.setImageResource(R.drawable.dog_profile_1);
                                 break;
-                            case "2":
+                            case 2:
                                 dog_image.setImageResource(R.drawable.dog_profile_2);
                                 break;
-                            case "3":
+                            case 3:
                                 dog_image.setImageResource(R.drawable.dog_profile_3);
                                 break;
                         }
@@ -147,6 +150,7 @@ public class InitInfo extends AppCompatActivity {
                 input.put("dog_gender", dog_gender_ed.getText().toString());
                 input.put("dog_type", dog_type_ed.getText().toString());
                 input.put("dog_weight", Integer.parseInt(dog_weight_ed.getText().toString()));
+                input.put("dog_image", profile_image_tag);
 
                 retrofitClient.retrofitPostAPI.postUser(input).enqueue(new Callback<Data>() {
                     @Override
@@ -154,10 +158,13 @@ public class InitInfo extends AppCompatActivity {
                         if(response.isSuccessful()){
                             Data data = response.body();
 
-                            intent_main = new Intent(getApplicationContext(), MainActivity.class);
-                            intent_main.putExtra("uid", uid);
+                            sharedEditor.putString("token", data.getToken());
+                            sharedEditor.putInt("profile_image", profile_image_tag);
+                            sharedEditor.commit();
 
+                            intent_main = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent_main);
+
                             finish();
 
                         }
