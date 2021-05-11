@@ -18,6 +18,9 @@ public interface RetrofitPostAPI {
     @POST("/user")
     Call<Data> postUser(@FieldMap HashMap<String, Object> param);
 
+    @FormUrlEncoded
+    @POST("/user/update")
+    Call<Data> postUserUpdate(@Header("Authorization") String authorization, @FieldMap HashMap<String, Object> param);
 
     @FormUrlEncoded
     @POST("/alarm")

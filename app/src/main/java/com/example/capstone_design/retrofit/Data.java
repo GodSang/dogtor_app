@@ -18,38 +18,17 @@ public class Data {
     @Expose
     private String RGB;
 
-    @SerializedName("user_id")
-    private String user_id;
-
-    @SerializedName("email")
-    private String email;
-
     @SerializedName("uid")
     private String uid;
+
+    @SerializedName("token")
+    private String token;
 
     @SerializedName("next")
     private String next;
 
-    @SerializedName("id")
-    private String id;
-
-    @SerializedName("password")
-    private String password;
-
-    @SerializedName("eat")
-    private String eat;
-
-    @SerializedName("color")
-    private String color;
-
-    @SerializedName("title")
-    private String title;
-
-    @SerializedName("body")
-    private String  body;
-
     @SerializedName("dog_image")
-    private String dog_iamge;
+    private int dog_iamge;
 
     @SerializedName("dog_name")
     private String dog_name;
@@ -96,20 +75,20 @@ public class Data {
         return RGB;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
     public void setUid(String uid) {
         this.uid = uid;
     }
 
     public String getUid() {
         return uid;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
     }
 
     public void setNext(String next) {
@@ -120,51 +99,11 @@ public class Data {
         return next;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setEat(String eat) {
-        this.eat = eat;
-    }
-
-    public String getEat() {
-        return eat;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setDog_iamge(String dog_iamge) {
+    public void setDog_iamge(int dog_iamge) {
         this.dog_iamge = dog_iamge;
     }
 
-    public String getDog_iamge() {
+    public int getDog_iamge() {
         return dog_iamge;
     }
 
@@ -207,7 +146,6 @@ public class Data {
     public Integer getDog_weight() {
         return dog_weight;
     }
-
 
     public void setKey(String key) {
         this.key = key;
