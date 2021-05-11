@@ -1,12 +1,15 @@
 package com.example.capstone_design;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,6 +19,7 @@ import com.example.capstone_design.retrofit.RetrofitClient;
 import java.util.HashMap;
 import java.util.function.ToDoubleBiFunction;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,6 +33,7 @@ public class InitInfo extends AppCompatActivity {
 
     Button dog_service_start;
     // TODO: 아직 이미지 선택 처리부분은 안함 (추후  다이얼로그로 할 것)
+    CircleImageView dog_image;
     EditText dog_name_ed;
     EditText dog_birth_ed;
     EditText dog_gender_ed;
@@ -37,7 +42,12 @@ public class InitInfo extends AppCompatActivity {
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
-    //String saveSharedName= "dog_info";
+    private CircleImageView profile_image1;
+    private CircleImageView profile_image2;
+    private CircleImageView profile_image3;
+    private CircleImageView selected_profile_image;
+
+    String profile_image_tag = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +59,80 @@ public class InitInfo extends AppCompatActivity {
         uid = get_uid_intent.getStringExtra("uid");
 
         dog_service_start = findViewById(R.id.dog_service_start);
+        dog_image = findViewById(R.id.dog_image);
         dog_name_ed = findViewById(R.id.dog_name);
         dog_birth_ed = findViewById(R.id.dog_age); // dog_birth // Integer
         dog_gender_ed = findViewById(R.id.dog_gender); // dog_gender // String
         dog_type_ed = findViewById(R.id.dog_kind); // dog_type // String
         dog_weight_ed = findViewById(R.id.dog_weight); // dog_weight // integer
+
+        View v = getLayoutInflater().inflate(R.layout.profile_item, null);
+        profile_image1 = v.findViewById(R.id.profile_image1);
+        profile_image2 = v.findViewById(R.id.profile_image2);
+        profile_image3 = v.findViewById(R.id.profile_image3);
+        selected_profile_image = v.findViewById(R.id.selected_profile_image);
+
+        // 프로필 선택시 다이얼로그 실행
+        dog_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(InitInfo.this);
+
+                profile_image1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        selected_profile_image.setImageResource(R.drawable.dog_profile_1);
+                        profile_image_tag = "1";
+                    }
+                });
+
+                profile_image2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        selected_profile_image.setImageResource(R.drawable.dog_profile_2);
+                        profile_image_tag = "2";
+                    }
+                });
+
+                profile_image3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        selected_profile_image.setImageResource(R.drawable.dog_profile_3);
+                        profile_image_tag = "3";
+                    }
+                });
+
+                // 다이얼로그 여러번 생성 시(즉, 한 번 이상 프로필 이미지 선택해서 다이얼로그가 여러 번 띄워질 시
+                // 뷰가 그 횟수만큼 생기기 때문에 오류가 발생해서 중복 된 뷰 삭제 하는 부분
+                if (v.getParent() != null)
+                    ((ViewGroup)v.getParent()).removeView(v);
+
+                dialog.setTitle("프로필 사진 선택");
+                dialog.setView(v).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        switch (profile_image_tag){
+                            case "1":
+                                dog_image.setImageResource(R.drawable.dog_profile_1);
+                                break;
+                            case "2":
+                                dog_image.setImageResource(R.drawable.dog_profile_2);
+                                break;
+                            case "3":
+                                dog_image.setImageResource(R.drawable.dog_profile_3);
+                                break;
+                        }
+                    }
+                })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                dialog.show();
+            }
+        });
 
         dog_service_start.setOnClickListener(new View.OnClickListener() {
 
