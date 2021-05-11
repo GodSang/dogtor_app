@@ -24,7 +24,7 @@
         android:id="@+id/main_dog_profile_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/dog_profile"
+        android:src="@drawable/dog_profile_1"
         app:layout_constraintDimensionRatio="1"
         android:layout_marginTop="160dp"
         android:layout_marginLeft="30dp"

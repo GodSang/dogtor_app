@@ -39,6 +39,7 @@
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <TextView
         android:visibility="gone"
         android:layout_width="match_parent"
@@ -48,19 +49,47 @@
         android:gravity="center">
     </TextView>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/edit_profile_image"
+        android:src="@drawable/dog_profile_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.3">
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:id="@+id/edit_profile_msg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:text="반려동물의 프로필사진을 선택하세요."
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_image"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.03">
+    </TextView>
+
     <EditText
         android:id="@+id/edit_dog_name"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="반려동물의 이름을 입력하세요."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="36dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_msg"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08">
     </EditText>
@@ -84,7 +113,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/edit_dog_sex"
+        android:id="@+id/edit_dog_gender"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="반려동물의 성별을 입력하세요."
@@ -101,7 +130,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/edit_dog_kind"
+        android:id="@+id/edit_dog_type"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="반려동물의 견종을 입력하세요."
@@ -112,7 +141,7 @@
         android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_dog_sex"
+        app:layout_constraintTop_toBottomOf="@+id/edit_dog_gender"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08"
         >
@@ -130,13 +159,13 @@
         android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_dog_kind"
+        app:layout_constraintTop_toBottomOf="@+id/edit_dog_type"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08">
     </EditText>
 
     <Button
-        android:id="@+id/edit_dog_service_start"
+        android:id="@+id/edit_profile_finish_btn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="확인"
