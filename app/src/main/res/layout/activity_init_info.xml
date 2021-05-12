@@ -71,7 +71,56 @@
         app:layout_constraintHeight_percent="0.08">
     </EditText>
 
-    <EditText
+    <LinearLayout
+        android:id="@+id/dog_gender"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/login_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dog_age"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/dog_gender_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <RadioButton
+                android:id="@+id/dog_gender_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:checked="true"
+                android:layout_weight="1">
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/dog_gender_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="W"
+                android:layout_weight="1">
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/dog_gender_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NONE"
+                android:layout_weight="1">
+            </RadioButton>
+        </RadioGroup>
+    </LinearLayout>
+
+    <!--<EditText
         android:id="@+id/dog_gender"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -88,7 +137,7 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08">
     </EditText>
-
+-->
     <EditText
         android:id="@+id/dog_kind"
         android:layout_width="0dp"
@@ -132,6 +181,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="DOGTOR의 서비스를 시작하세요."
+        android:clickable="true"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:backgroundTint="@color/main_color"

@@ -43,12 +43,13 @@ public class FragmentSetting extends Fragment {
     String TAG = "FragmentSetting";
 
     private GoogleSignInClient googleSignInClient;
+    SharedPreferences loadShared;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        SharedPreferences loadShared = this.getActivity().getSharedPreferences("DB", Context.MODE_PRIVATE);
+        loadShared = this.getActivity().getSharedPreferences("DB", Context.MODE_PRIVATE);
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_setting, container, false);
@@ -135,5 +136,23 @@ public class FragmentSetting extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        profile_image_tag = loadShared.getInt("profile_image" , 1);
+
+        switch (profile_image_tag){
+            case 1:
+                setting_profile_image.setImageResource(R.drawable.dog_profile_1);
+                break;
+            case 2:
+                setting_profile_image.setImageResource(R.drawable.dog_profile_2);
+                break;
+            case 3:
+                setting_profile_image.setImageResource(R.drawable.dog_profile_3);
+                break;
+        }
     }
 }

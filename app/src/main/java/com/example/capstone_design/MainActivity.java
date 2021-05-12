@@ -64,30 +64,7 @@ public class MainActivity extends AppCompatActivity {
         getToken();
         //---------------------------------------------------------------------------
 
-        // GET 요청
-        retrofitClient.retrofitGetAPI.getUser(token).enqueue(new Callback<Data>() {
-            @Override
-            public void onResponse(Call<Data> call, Response<Data> response) {
-                if(response.isSuccessful()){
-                    Data data = response.body();
-
-                    Log.d("hyeals_bundle", data.getDog_name());
-                    image_tag = data.getDog_iamge();
-                    name = data.getDog_name();
-                    birth = data.getDog_birth();
-                    gender = data.getDog_gender();
-                    type = data.getDog_type();
-                    weight =  data.getDog_weight();
-                }
-
-                FragmentView(TAG_HOME_FRAGMENT, fragmentMainHome);
-            }
-
-            @Override
-            public void onFailure(Call<Data> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+        FragmentView(TAG_HOME_FRAGMENT, fragmentMainHome);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -120,18 +97,18 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
 
         if(manager.findFragmentByTag(tag)==null){
-            if(tag == TAG_HOME_FRAGMENT){
-                Bundle home_bundle = new Bundle(5);
-                home_bundle.putInt("dog_image", image_tag);
-                home_bundle.putString("dog_name",name);
-                home_bundle.putInt("dog_birth", birth);
-                home_bundle.putString("dog_gender", gender);
-                home_bundle.putString("dog_type", type);
-                home_bundle.putInt("dog_weight", weight);
-                fragmentMainHome.setArguments(home_bundle);
-
-                Log.d("hyeals_bundle_name", home_bundle.getString("dog_name"));
-            }
+//            if(tag == TAG_HOME_FRAGMENT){
+//                Bundle home_bundle = new Bundle(5);
+//                home_bundle.putInt("dog_image", image_tag);
+//                home_bundle.putString("dog_name",name);
+//                home_bundle.putInt("dog_birth", birth);
+//                home_bundle.putString("dog_gender", gender);
+//                home_bundle.putString("dog_type", type);
+//                home_bundle.putInt("dog_weight", weight);
+//                fragmentMainHome.setArguments(home_bundle);
+//
+//                Log.d("hyeals_bundle_name", home_bundle.getString("dog_name"));
+//            }
             transaction.add(R.id.fragment, fragment, tag);
         }
 
