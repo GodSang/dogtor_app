@@ -1,12 +1,10 @@
 package com.example.capstone_design;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 
-import com.example.capstone_design.recyclerview.RecyclerViewAdapter;
+import com.example.capstone_design.adapter.RecyclerViewAdapter;
 import com.example.capstone_design.retrofit.Data;
 import com.example.capstone_design.retrofit.RecyclerViewData;
 import com.example.capstone_design.retrofit.RetrofitClient;
@@ -33,7 +31,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class FragmentRecord extends Fragment {

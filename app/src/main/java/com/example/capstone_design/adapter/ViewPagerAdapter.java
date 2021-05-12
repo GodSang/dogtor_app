@@ -1,4 +1,4 @@
-package com.example.capstone_design.recyclerview;
+package com.example.capstone_design.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

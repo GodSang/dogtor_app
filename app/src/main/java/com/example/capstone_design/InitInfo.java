@@ -10,9 +10,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.example.capstone_design.retrofit.Data;
 import com.example.capstone_design.retrofit.RetrofitClient;
@@ -33,12 +36,14 @@ public class InitInfo extends AppCompatActivity {
     CircleImageView dog_image;
     EditText dog_name_ed;
     EditText dog_birth_ed;
-    //EditText dog_gender_ed;
     EditText dog_type_ed;
     EditText dog_weight_ed;
 
+    Spinner dog_type_spinner;
+
     RadioGroup dog_gender_group;
     String dog_gender = "M";
+    String dog_type = "소형견";
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
@@ -65,9 +70,14 @@ public class InitInfo extends AppCompatActivity {
         dog_image = findViewById(R.id.dog_image);
         dog_name_ed = findViewById(R.id.dog_name);
         dog_birth_ed = findViewById(R.id.dog_age); // dog_birth // Integer
-        dog_type_ed = findViewById(R.id.dog_kind); // dog_type // String
+        //dog_type_ed = findViewById(R.id.dog_kind); // dog_type // String
         dog_weight_ed = findViewById(R.id.dog_weight); // dog_weight // integer
         dog_gender_group = findViewById(R.id.dog_gender_group);
+        dog_type_spinner = findViewById(R.id.dog_type_spinner);
+
+        String[] dog_type_spinner_items = getResources().getStringArray(R.array.dog_type_items);
+        ArrayAdapter dog_type_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dog_type_spinner_items);
+        dog_type_spinner.setAdapter(dog_type_adapter);
 
         View v = getLayoutInflater().inflate(R.layout.profile_item, null);
         profile_image1 = v.findViewById(R.id.profile_image1);
@@ -151,6 +161,28 @@ public class InitInfo extends AppCompatActivity {
             }
         });
 
+        // 견종 선택 이벤트
+        dog_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (position) {
+                    case 0:
+                        dog_type = "small";
+                        break;
+                    case 1:
+                        dog_type = "medium";
+                        break;
+                    case 2:
+                        dog_type = "big";
+                        break;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         dog_service_start.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -162,7 +194,7 @@ public class InitInfo extends AppCompatActivity {
                 input.put("dog_name", dog_name_ed.getText().toString());
                 input.put("dog_birth", Integer.parseInt(dog_birth_ed.getText().toString()));
                 input.put("dog_gender", dog_gender);
-                input.put("dog_type", dog_type_ed.getText().toString());
+                input.put("dog_type", dog_type);
                 input.put("dog_weight", Integer.parseInt(dog_weight_ed.getText().toString()));
                 input.put("dog_image", profile_image_tag);
 

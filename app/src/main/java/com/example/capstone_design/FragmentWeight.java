@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.capstone_design.recyclerview.ViewPagerAdapter;
+import com.example.capstone_design.adapter.ViewPagerAdapter;
 
 import me.relex.circleindicator.CircleIndicator;
 
