@@ -31,7 +31,7 @@ public class FragmentWeight extends Fragment {
         activity = getActivity();
         context = getContext();
 
-        viewPager = viewPager.findViewById(R.id.pager);
+        viewPager = view.findViewById(R.id.pager);
         adapter = new ViewPagerAdapter(context);
         viewPager.setAdapter(adapter);
         indicator = view.findViewById(R.id.indicator);
