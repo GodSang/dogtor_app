@@ -67,6 +67,7 @@ public class InitInfo extends AppCompatActivity {
         dog_birth_ed = findViewById(R.id.dog_age); // dog_birth // Integer
         dog_type_ed = findViewById(R.id.dog_kind); // dog_type // String
         dog_weight_ed = findViewById(R.id.dog_weight); // dog_weight // integer
+        dog_gender_group = findViewById(R.id.dog_gender_group);
 
         View v = getLayoutInflater().inflate(R.layout.profile_item, null);
         profile_image1 = v.findViewById(R.id.profile_image1);

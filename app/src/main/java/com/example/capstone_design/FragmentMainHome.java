@@ -94,7 +94,7 @@ public class FragmentMainHome extends Fragment {
                     main_dog_name.setText("이름: " + data.getDog_name());
                     main_dog_age.setText("나이: " + String.valueOf(data.getDog_birth()));
                     main_dog_gender.setText("성별: " + data.getDog_gender());
-                    main_dog_type.setText("견종: " + data.getDog_gender());
+                    main_dog_type.setText("견종: " + data.getDog_type());
                     main_dog_weight.setText("몸무게: " + String.valueOf(data.getDog_weight()));
 
                     switch(data.getDog_iamge())
