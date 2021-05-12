@@ -51,6 +51,9 @@ public class Data {
     @SerializedName("optionFlag")
     private int optionFlag;
 
+    @SerializedName("dog_fat")
+    private float dog_fat;
+
     public void setAmountOfMeal(int amountOfMeal) {
         this.amountOfMeal = amountOfMeal;
     }
@@ -162,4 +165,8 @@ public class Data {
     public int getOptionFlag() {
         return optionFlag;
     }
+
+    public void setDogFat(float dog_fat) { this.dog_fat = dog_fat; }
+
+    public float getDogFat() { return dog_fat; }
 }

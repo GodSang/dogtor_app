@@ -14,7 +14,7 @@ import com.example.capstone_design.R;
 public class ViewPagerAdapter extends PagerAdapter{
     private LayoutInflater inflater;
     private Context context;
-    private int[] images = {R.drawable.dog_profile_1, R.drawable.dog_profile_2, R.drawable.dog_profile_3};
+    private int[] images = {R.drawable.dog_weight_1, R.drawable.dog_weight_2, R.drawable.dog_weight_3, R.drawable.dog_weight_4, R.drawable.dog_weight_5};
 
     public ViewPagerAdapter(Context context) {
         this.context = context;

@@ -22,4 +22,6 @@ public interface RetrofitGetAPI {
     Call<RecyclerViewData> getPoo(@Header("Authorization") String authorization, @Query("page") int page,
                           @Query("limit") int limit, @Query("date") String date);
 
+    @GET("/weight/fat")
+    Call<Data> getFat(@Header("Authorization") String authorization, @Query("dog_status") int status);
 }
