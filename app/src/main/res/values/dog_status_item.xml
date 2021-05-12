@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dog_status_items">
+        <item>1단계</item>
+        <item>2단계</item>
+        <item>3단계</item>
+        <item>4단계</item>
+        <item>5단계</item>
+    </string-array>
+</resources>
