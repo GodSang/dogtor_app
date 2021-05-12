@@ -59,8 +59,6 @@ public class FragmentMainHome extends Fragment {
         main_dog_type = view.findViewById(R.id.main_dog_kind);
         main_dog_weight = view.findViewById(R.id.main_dog_weight);
         main_dog_profile_image = view.findViewById(R.id.main_dog_profile_image);
-        //dog_status_info = view.findViewById(R.id.dog_status_info);
-       // dog_status_info_time = view.findViewById(R.id.dog_status_info_time);
 
         Log.d("hyeals_bundle_fragment", "프래그먼트 실행");
 
@@ -94,8 +92,19 @@ public class FragmentMainHome extends Fragment {
                     main_dog_name.setText("이름: " + data.getDog_name());
                     main_dog_age.setText("나이: " + String.valueOf(data.getDog_birth()));
                     main_dog_gender.setText("성별: " + data.getDog_gender());
-                    main_dog_type.setText("견종: " + data.getDog_type());
                     main_dog_weight.setText("몸무게: " + String.valueOf(data.getDog_weight()));
+
+                    switch (data.getDog_type()){
+                        case "small":
+                            main_dog_type.setText("견종: 소형견");
+                            break;
+                        case "medium":
+                            main_dog_type.setText("견종: 중형견");
+                            break;
+                        case "big":
+                            main_dog_type.setText("견종: 대형견");
+                            break;
+                    }
 
                     switch(data.getDog_iamge())
                     {

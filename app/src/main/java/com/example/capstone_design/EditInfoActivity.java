@@ -9,11 +9,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.example.capstone_design.retrofit.Data;
 import com.example.capstone_design.retrofit.RetrofitClient;
@@ -38,6 +41,7 @@ public class EditInfoActivity extends AppCompatActivity {
     private RadioButton edit_dog_gender_man;
     private RadioButton edit_dog_gender_woman;
     private RadioButton edit_dog_gender_none;
+    private Spinner edit_dog_type_spinner;
 
     private CircleImageView profile_image1;
     private CircleImageView profile_image2;
@@ -46,6 +50,8 @@ public class EditInfoActivity extends AppCompatActivity {
 
     int profile_image_tag = 1;
     String dog_gender;
+    String dog_type;
+    int position = 0;
 
     String token;
 
@@ -65,7 +71,7 @@ public class EditInfoActivity extends AppCompatActivity {
         edit_profile_image = findViewById(R.id.edit_profile_image);
         edit_dog_name = findViewById(R.id.edit_dog_name);
         edit_dog_age = findViewById(R.id.edit_dog_age);
-        edit_dog_type = findViewById(R.id.edit_dog_type);
+        //edit_dog_type = findViewById(R.id.edit_dog_type);
         edit_dog_weight = findViewById(R.id.edit_dog_weight);
         edit_profile_finish_btn = findViewById(R.id.edit_profile_finish_btn);
         edit_dog_gender_group = findViewById(R.id.edit_dog_gender_group);
@@ -73,7 +79,13 @@ public class EditInfoActivity extends AppCompatActivity {
         edit_dog_gender_woman = findViewById(R.id.edit_dog_gender_woman);
         edit_dog_gender_none = findViewById(R.id.edit_dog_gender_none);
 
+        edit_dog_type_spinner = findViewById(R.id.edit_dog_type_spinner);
+
         token = loadShared.getString("token", "");
+
+        String[] dog_type_spinner_items = getResources().getStringArray(R.array.dog_type_items);
+        ArrayAdapter dog_type_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dog_type_spinner_items);
+        edit_dog_type_spinner.setAdapter(dog_type_adapter);
 
         retrofitClient.retrofitGetAPI.getUser(token).enqueue(new Callback<Data>() {
             @Override
@@ -107,7 +119,18 @@ public class EditInfoActivity extends AppCompatActivity {
                         break;
                 }
 
-                edit_dog_type.setText(data.getDog_type());
+                switch (data.getDog_type()){
+                    case "small":
+                        edit_dog_type_spinner.setSelection(0);
+                        break;
+                    case "medium":
+                        edit_dog_type_spinner.setSelection(1);
+                        break;
+                    case "big":
+                        edit_dog_type_spinner.setSelection(2);
+                        break;
+                }
+                //edit_dog_type.setText(data.getDog_type());
                 edit_dog_weight.setText(String.valueOf(data.getDog_weight()));
 
             }
@@ -135,7 +158,7 @@ public class EditInfoActivity extends AppCompatActivity {
                 input.put("dog_name", edit_dog_name.getText().toString());
                 input.put("dog_birth", Integer.parseInt(edit_dog_age.getText().toString()));
                 input.put("dog_gender", dog_gender);
-                input.put("dog_type", edit_dog_type.getText().toString());
+                input.put("dog_type", dog_type);
                 input.put("dog_weight", Integer.parseInt(edit_dog_weight.getText().toString()));
                 input.put("dog_image", profile_image_tag);
 
@@ -237,5 +260,26 @@ public class EditInfoActivity extends AppCompatActivity {
             }
         });
 
+        // 견종 선택 이벤트
+        edit_dog_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (position) {
+                    case 0:
+                        dog_type = "small";
+                        break;
+                    case 1:
+                        dog_type = "medium";
+                        break;
+                    case 2:
+                        dog_type = "big";
+                        break;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 }

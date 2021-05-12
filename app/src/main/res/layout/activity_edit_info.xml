@@ -77,16 +77,33 @@
         app:layout_constraintHeight_percent="0.03">
     </TextView>
 
+    <TextView
+        android:id="@+id/edit_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:text="이름: "
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_dog_name"
+        app:layout_constraintEnd_toStartOf="@id/edit_dog_name"
+        app:layout_constraintBottom_toBottomOf="@id/edit_dog_name">
+    </TextView>
+
     <EditText
         android:id="@+id/edit_dog_name"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
         android:hint="반려동물의 이름을 입력하세요."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginTop="36dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="72dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_profile_msg"
@@ -94,17 +111,34 @@
         app:layout_constraintHeight_percent="0.08">
     </EditText>
 
+    <TextView
+        android:id="@+id/edit_age_title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:text="나이: "
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_dog_age"
+        app:layout_constraintEnd_toStartOf="@id/edit_dog_age"
+        app:layout_constraintBottom_toBottomOf="@id/edit_dog_age">
+    </TextView>
+
     <EditText
         android:id="@+id/edit_dog_age"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="반려동물의 나이를 입력하세요"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:inputType="number"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="72dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_dog_name"
@@ -112,14 +146,29 @@
         app:layout_constraintHeight_percent="0.08">
     </EditText>
 
+    <TextView
+        android:id="@+id/edit_gender_title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:text="성별: "
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_dog_gender"
+        app:layout_constraintEnd_toStartOf="@id/edit_dog_gender"
+        app:layout_constraintBottom_toBottomOf="@id/edit_dog_gender">
+    </TextView>
+
     <LinearLayout
         android:id="@+id/edit_dog_gender"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="72dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_dog_age"
@@ -160,33 +209,47 @@
         </RadioGroup>
     </LinearLayout>
 
-    <!--<EditText
-        android:id="@+id/edit_dog_gender"
+    <TextView
+        android:id="@+id/edit_type_title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:text="견종: "
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_dog_type_spinner"
+        app:layout_constraintEnd_toStartOf="@id/edit_dog_type_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/edit_dog_type_spinner">
+    </TextView>
+
+    <Spinner
+        android:id="@+id/edit_dog_type_spinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:hint="반려동물의 성별을 입력하세요."
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="72dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_dog_age"
+        app:layout_constraintTop_toBottomOf="@+id/edit_dog_gender"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08">
-    </EditText>
--->
+    </Spinner>
+<!--
     <EditText
         android:id="@+id/edit_dog_type"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
         android:hint="반려동물의 견종을 입력하세요."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="72dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_dog_gender"
@@ -194,20 +257,37 @@
         app:layout_constraintHeight_percent="0.08"
         >
     </EditText>
+-->
+    <TextView
+        android:id="@+id/edit_weight_title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:text="몸무게: "
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_dog_weight"
+        app:layout_constraintEnd_toStartOf="@id/edit_dog_weight"
+        app:layout_constraintBottom_toBottomOf="@id/edit_dog_weight">
+    </TextView>
 
     <EditText
         android:id="@+id/edit_dog_weight"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
         android:hint="반려동물의 몸무게를 입력하세요."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="72dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/login_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_dog_type"
+        app:layout_constraintTop_toBottomOf="@+id/edit_dog_type_spinner"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08">
     </EditText>
