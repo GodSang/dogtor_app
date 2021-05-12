@@ -181,7 +181,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="DOGTOR의 서비스를 시작하세요."
-        android:clickable="true"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:backgroundTint="@color/main_color"
