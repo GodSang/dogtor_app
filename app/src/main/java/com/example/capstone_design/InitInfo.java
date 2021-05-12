@@ -8,24 +8,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.example.capstone_design.retrofit.Data;
 import com.example.capstone_design.retrofit.RetrofitClient;
 
 import java.util.HashMap;
-import java.util.function.ToDoubleBiFunction;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InitInfo extends AppCompatActivity {
 
@@ -36,9 +33,12 @@ public class InitInfo extends AppCompatActivity {
     CircleImageView dog_image;
     EditText dog_name_ed;
     EditText dog_birth_ed;
-    EditText dog_gender_ed;
+    //EditText dog_gender_ed;
     EditText dog_type_ed;
     EditText dog_weight_ed;
+
+    RadioGroup dog_gender_group;
+    String dog_gender = "M";
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
@@ -65,7 +65,6 @@ public class InitInfo extends AppCompatActivity {
         dog_image = findViewById(R.id.dog_image);
         dog_name_ed = findViewById(R.id.dog_name);
         dog_birth_ed = findViewById(R.id.dog_age); // dog_birth // Integer
-        dog_gender_ed = findViewById(R.id.dog_gender); // dog_gender // String
         dog_type_ed = findViewById(R.id.dog_kind); // dog_type // String
         dog_weight_ed = findViewById(R.id.dog_weight); // dog_weight // integer
 
@@ -137,6 +136,20 @@ public class InitInfo extends AppCompatActivity {
             }
         });
 
+        // 성별 선택 이벤트
+        dog_gender_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if(checkedId == R.id.dog_gender_man){
+                    dog_gender = "M";
+                }else if(checkedId == R.id.dog_gender_woman){
+                    dog_gender = "W";
+                }else{
+                    dog_gender = "NONE";
+                }
+            }
+        });
+
         dog_service_start.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -147,7 +160,7 @@ public class InitInfo extends AppCompatActivity {
                 input.put("uid", uid);
                 input.put("dog_name", dog_name_ed.getText().toString());
                 input.put("dog_birth", Integer.parseInt(dog_birth_ed.getText().toString()));
-                input.put("dog_gender", dog_gender_ed.getText().toString());
+                input.put("dog_gender", dog_gender);
                 input.put("dog_type", dog_type_ed.getText().toString());
                 input.put("dog_weight", Integer.parseInt(dog_weight_ed.getText().toString()));
                 input.put("dog_image", profile_image_tag);

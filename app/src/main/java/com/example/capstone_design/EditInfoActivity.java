@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.capstone_design.retrofit.Data;
 import com.example.capstone_design.retrofit.RetrofitClient;
@@ -30,10 +31,13 @@ public class EditInfoActivity extends AppCompatActivity {
     private CircleImageView edit_profile_image;
     private EditText edit_dog_name;
     private EditText edit_dog_age;
-    private EditText edit_dog_gender;
     private EditText edit_dog_type;
     private EditText edit_dog_weight;
     private Button edit_profile_finish_btn;
+    private RadioGroup edit_dog_gender_group;
+    private RadioButton edit_dog_gender_man;
+    private RadioButton edit_dog_gender_woman;
+    private RadioButton edit_dog_gender_none;
 
     private CircleImageView profile_image1;
     private CircleImageView profile_image2;
@@ -41,6 +45,7 @@ public class EditInfoActivity extends AppCompatActivity {
     private CircleImageView selected_profile_image;
 
     int profile_image_tag = 1;
+    String dog_gender;
 
     String token;
 
@@ -60,10 +65,13 @@ public class EditInfoActivity extends AppCompatActivity {
         edit_profile_image = findViewById(R.id.edit_profile_image);
         edit_dog_name = findViewById(R.id.edit_dog_name);
         edit_dog_age = findViewById(R.id.edit_dog_age);
-        edit_dog_gender = findViewById(R.id.edit_dog_gender);
         edit_dog_type = findViewById(R.id.edit_dog_type);
         edit_dog_weight = findViewById(R.id.edit_dog_weight);
         edit_profile_finish_btn = findViewById(R.id.edit_profile_finish_btn);
+        edit_dog_gender_group = findViewById(R.id.edit_dog_gender_group);
+        edit_dog_gender_man = findViewById(R.id.edit_dog_gender_man);
+        edit_dog_gender_woman = findViewById(R.id.edit_dog_gender_woman);
+        edit_dog_gender_none = findViewById(R.id.edit_dog_gender_none);
 
         token = loadShared.getString("token", "");
 
@@ -86,7 +94,19 @@ public class EditInfoActivity extends AppCompatActivity {
 
                 edit_dog_name.setText(data.getDog_name());
                 edit_dog_age.setText(String.valueOf(data.getDog_birth()));
-                edit_dog_gender.setText(data.getDog_gender());
+
+                switch (data.getDog_gender()){
+                    case "M":
+                        edit_dog_gender_man.setChecked(true);
+                        break;
+                    case "W":
+                        edit_dog_gender_woman.setChecked(true);
+                        break;
+                    case "NONE":
+                        edit_dog_gender_none.setChecked(true);
+                        break;
+                }
+
                 edit_dog_type.setText(data.getDog_type());
                 edit_dog_weight.setText(String.valueOf(data.getDog_weight()));
 
@@ -114,7 +134,7 @@ public class EditInfoActivity extends AppCompatActivity {
                 input.put("uid", token);
                 input.put("dog_name", edit_dog_name.getText().toString());
                 input.put("dog_birth", Integer.parseInt(edit_dog_age.getText().toString()));
-                input.put("dog_gender", edit_dog_gender.getText().toString());
+                input.put("dog_gender", dog_gender);
                 input.put("dog_type", edit_dog_type.getText().toString());
                 input.put("dog_weight", Integer.parseInt(edit_dog_weight.getText().toString()));
                 input.put("dog_image", profile_image_tag);
@@ -200,6 +220,20 @@ public class EditInfoActivity extends AppCompatActivity {
                         });
 
                 dialog.show();
+            }
+        });
+
+        // 성별 선택 이벤트
+        edit_dog_gender_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if(checkedId == R.id.edit_dog_gender_man){
+                    dog_gender = "M";
+                }else if(checkedId == R.id.edit_dog_gender_woman){
+                    dog_gender = "W";
+                }else{
+                    dog_gender = "NONE";
+                }
             }
         });
 

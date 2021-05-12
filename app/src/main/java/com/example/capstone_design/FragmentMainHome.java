@@ -14,9 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.capstone_design.retrofit.Data;
+import com.example.capstone_design.retrofit.RetrofitClient;
+
 import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentMainHome extends Fragment {
 
@@ -29,19 +35,23 @@ public class FragmentMainHome extends Fragment {
     TextView dog_status_info;
     TextView dog_status_info_time;
 
-    // 메인 액티비티에서 GET 요청을 통해 회원가입 데이터 받아오기
-    Bundle home_bundle;
-
     // SharedPreferences를 통해 fcm body 데이터 가져오기
     String loadSharedName = "FCM_DB";
     String fcm_body = "";
     String fcm_time = "";
+
+    RetrofitClient retrofitClient = new RetrofitClient();
+
+    String token;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_home, container, false);
+
+        SharedPreferences loadShared = this.getActivity().getSharedPreferences("DB", Context.MODE_PRIVATE);
+        token = loadShared.getString("token", "");
 
         main_dog_name = view.findViewById(R.id.main_dog_name);
         main_dog_age = view.findViewById(R.id.main_dog_age);
@@ -52,31 +62,7 @@ public class FragmentMainHome extends Fragment {
         //dog_status_info = view.findViewById(R.id.dog_status_info);
        // dog_status_info_time = view.findViewById(R.id.dog_status_info_time);
 
-        home_bundle = getArguments();
         Log.d("hyeals_bundle_fragment", "프래그먼트 실행");
-
-        if(home_bundle != null) {
-            Log.d("hyeals_bundle_fragment", "여기 실행");
-            Log.d("hyeals_bundle_fragment", home_bundle.getString("dog_name"));
-
-            switch (home_bundle.getInt("dog_image")){
-                case 1:
-                    main_dog_profile_image.setImageResource(R.drawable.dog_profile_1);
-                    break;
-                case 2:
-                    main_dog_profile_image.setImageResource(R.drawable.dog_profile_2);
-                    break;
-                case 3:
-                    main_dog_profile_image.setImageResource(R.drawable.dog_profile_3);
-                    break;
-            }
-
-            main_dog_name.setText("이름: " + home_bundle.getString("dog_name"));
-            main_dog_age.setText("나이: " + home_bundle.getInt("dog_birth"));
-            main_dog_gender.setText("성별: " + home_bundle.getString("dog_gender"));
-            main_dog_type.setText("견종: " + home_bundle.getString("dog_type"));
-            main_dog_weight.setText("몸무게: " + home_bundle.getInt("dog_weight"));
-        }
 
         return view;
     }
@@ -95,5 +81,41 @@ public class FragmentMainHome extends Fragment {
             dog_status_info.setText(fcm_body);
             dog_status_info_time.setText(fcm_time);
         }
+
+        // GET 요청
+        retrofitClient.retrofitGetAPI.getUser(token).enqueue(new Callback<Data>() {
+            @Override
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                if (response.isSuccessful()) {
+                    Data data = response.body();
+
+                    Log.d("hyeals_bundle", data.getDog_name());
+
+                    main_dog_name.setText("이름: " + data.getDog_name());
+                    main_dog_age.setText("나이: " + String.valueOf(data.getDog_birth()));
+                    main_dog_gender.setText("성별: " + data.getDog_gender());
+                    main_dog_type.setText("견종: " + data.getDog_gender());
+                    main_dog_weight.setText("몸무게: " + String.valueOf(data.getDog_weight()));
+
+                    switch(data.getDog_iamge())
+                    {
+                        case 1:
+                            main_dog_profile_image.setImageResource(R.drawable.dog_profile_1);
+                            break;
+                        case 2:
+                            main_dog_profile_image.setImageResource(R.drawable.dog_profile_2);
+                            break;
+                        case 3:
+                            main_dog_profile_image.setImageResource(R.drawable.dog_profile_3);
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Data> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }
