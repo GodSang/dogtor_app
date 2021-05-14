@@ -16,10 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.capstone_design.retrofit.Data;
 import com.example.capstone_design.retrofit.RetrofitClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -36,7 +41,6 @@ public class InitInfo extends AppCompatActivity {
     CircleImageView dog_image;
     EditText dog_name_ed;
     EditText dog_birth_ed;
-    EditText dog_type_ed;
     EditText dog_weight_ed;
 
     Spinner dog_type_spinner;
@@ -70,7 +74,6 @@ public class InitInfo extends AppCompatActivity {
         dog_image = findViewById(R.id.dog_image);
         dog_name_ed = findViewById(R.id.dog_name);
         dog_birth_ed = findViewById(R.id.dog_age); // dog_birth // Integer
-        //dog_type_ed = findViewById(R.id.dog_kind); // dog_type // String
         dog_weight_ed = findViewById(R.id.dog_weight); // dog_weight // integer
         dog_gender_group = findViewById(R.id.dog_gender_group);
         dog_type_spinner = findViewById(R.id.dog_type_spinner);
@@ -212,6 +215,16 @@ public class InitInfo extends AppCompatActivity {
                             startActivity(intent_main);
 
                             finish();
+
+                        }else if(response.code() == 400){
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                                Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
                         }
                     }

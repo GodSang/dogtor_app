@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
     RetrofitClient retrofitClient = new RetrofitClient();
 
     String fcm_token;
-    String name, gender, type;
-    int birth, weight, image_tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,18 +95,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
 
         if(manager.findFragmentByTag(tag)==null){
-//            if(tag == TAG_HOME_FRAGMENT){
-//                Bundle home_bundle = new Bundle(5);
-//                home_bundle.putInt("dog_image", image_tag);
-//                home_bundle.putString("dog_name",name);
-//                home_bundle.putInt("dog_birth", birth);
-//                home_bundle.putString("dog_gender", gender);
-//                home_bundle.putString("dog_type", type);
-//                home_bundle.putInt("dog_weight", weight);
-//                fragmentMainHome.setArguments(home_bundle);
-//
-//                Log.d("hyeals_bundle_name", home_bundle.getString("dog_name"));
-//            }
+
             transaction.add(R.id.fragment, fragment, tag);
         }
 

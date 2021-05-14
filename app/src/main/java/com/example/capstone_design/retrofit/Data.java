@@ -54,6 +54,9 @@ public class Data {
     @SerializedName("dog_fat")
     private float dog_fat;
 
+    @SerializedName("message")
+    private String message;
+
     public void setAmountOfMeal(int amountOfMeal) {
         this.amountOfMeal = amountOfMeal;
     }
@@ -169,4 +172,12 @@ public class Data {
     public void setDogFat(float dog_fat) { this.dog_fat = dog_fat; }
 
     public float getDogFat() { return dog_fat; }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }

@@ -41,7 +41,6 @@ public class FragmentRecord extends Fragment {
     Button record_pee_color_btn;
     Button record_poo_color_btn;
 
-    Bundle bundle_record;
     Context mContext;
 
     String selected_date; // GET 요청으로 보낼 날짜 값
@@ -210,8 +209,6 @@ public class FragmentRecord extends Fragment {
 
     private void getIntake() {
 
-        //recordIntakeRetrofitAPI = retrofit.create(RecordIntakeRetrofitAPI.class);
-
         retrofitClient.retrofitGetAPI.getIntake(token, intake_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override
             public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
@@ -234,8 +231,6 @@ public class FragmentRecord extends Fragment {
     }
 
     private void getPee(){
-
-       // recordPeeRetrofitAPI = retrofit.create(RecordPeeRetrofitAPI.class);
 
         retrofitClient.retrofitGetAPI.getPee(token, pee_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override
@@ -262,8 +257,6 @@ public class FragmentRecord extends Fragment {
     }
 
     private void getPoo(){
-
-        //recordPooRetrofitAPI = retrofit.create(RecordPooRetrofitAPI.class);
 
         retrofitClient.retrofitGetAPI.getPoo(token, poo_page, limit, selected_date).enqueue(new Callback<RecyclerViewData>() {
             @Override

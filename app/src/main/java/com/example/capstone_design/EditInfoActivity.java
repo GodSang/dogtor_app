@@ -17,10 +17,15 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.capstone_design.retrofit.Data;
 import com.example.capstone_design.retrofit.RetrofitClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,7 +39,6 @@ public class EditInfoActivity extends AppCompatActivity {
     private CircleImageView edit_profile_image;
     private EditText edit_dog_name;
     private EditText edit_dog_age;
-    private EditText edit_dog_type;
     private EditText edit_dog_weight;
     private Button edit_profile_finish_btn;
     private RadioGroup edit_dog_gender_group;
@@ -51,7 +55,6 @@ public class EditInfoActivity extends AppCompatActivity {
     int profile_image_tag = 1;
     String dog_gender;
     String dog_type;
-    int position = 0;
 
     String token;
 
@@ -71,7 +74,6 @@ public class EditInfoActivity extends AppCompatActivity {
         edit_profile_image = findViewById(R.id.edit_profile_image);
         edit_dog_name = findViewById(R.id.edit_dog_name);
         edit_dog_age = findViewById(R.id.edit_dog_age);
-        //edit_dog_type = findViewById(R.id.edit_dog_type);
         edit_dog_weight = findViewById(R.id.edit_dog_weight);
         edit_profile_finish_btn = findViewById(R.id.edit_profile_finish_btn);
         edit_dog_gender_group = findViewById(R.id.edit_dog_gender_group);
@@ -90,49 +92,60 @@ public class EditInfoActivity extends AppCompatActivity {
         retrofitClient.retrofitGetAPI.getUser(token).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
-                Data data = response.body();
 
-                switch (data.getDog_iamge()){
-                    case 1:
-                        edit_profile_image.setImageResource(R.drawable.dog_profile_1);
-                        break;
-                    case 2:
-                        edit_profile_image.setImageResource(R.drawable.dog_profile_2);
-                        break;
-                    case 3:
-                        edit_profile_image.setImageResource(R.drawable.dog_profile_3);
-                        break;
+                if (response.isSuccessful()){
+                    Data data = response.body();
+
+                    switch (data.getDog_iamge()){
+                        case 1:
+                            edit_profile_image.setImageResource(R.drawable.dog_profile_1);
+                            break;
+                        case 2:
+                            edit_profile_image.setImageResource(R.drawable.dog_profile_2);
+                            break;
+                        case 3:
+                            edit_profile_image.setImageResource(R.drawable.dog_profile_3);
+                            break;
+                    }
+
+                    edit_dog_name.setText(data.getDog_name());
+                    edit_dog_age.setText(String.valueOf(data.getDog_birth()));
+
+                    switch (data.getDog_gender()){
+                        case "M":
+                            edit_dog_gender_man.setChecked(true);
+                            break;
+                        case "W":
+                            edit_dog_gender_woman.setChecked(true);
+                            break;
+                        case "NONE":
+                            edit_dog_gender_none.setChecked(true);
+                            break;
+                    }
+
+                    switch (data.getDog_type()){
+                        case "small":
+                            edit_dog_type_spinner.setSelection(0);
+                            break;
+                        case "medium":
+                            edit_dog_type_spinner.setSelection(1);
+                            break;
+                        case "big":
+                            edit_dog_type_spinner.setSelection(2);
+                            break;
+                    }
+                    edit_dog_weight.setText(String.valueOf(data.getDog_weight()));
+                }else if(response.code() == 400){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
-
-                edit_dog_name.setText(data.getDog_name());
-                edit_dog_age.setText(String.valueOf(data.getDog_birth()));
-
-                switch (data.getDog_gender()){
-                    case "M":
-                        edit_dog_gender_man.setChecked(true);
-                        break;
-                    case "W":
-                        edit_dog_gender_woman.setChecked(true);
-                        break;
-                    case "NONE":
-                        edit_dog_gender_none.setChecked(true);
-                        break;
-                }
-
-                switch (data.getDog_type()){
-                    case "small":
-                        edit_dog_type_spinner.setSelection(0);
-                        break;
-                    case "medium":
-                        edit_dog_type_spinner.setSelection(1);
-                        break;
-                    case "big":
-                        edit_dog_type_spinner.setSelection(2);
-                        break;
-                }
-                //edit_dog_type.setText(data.getDog_type());
-                edit_dog_weight.setText(String.valueOf(data.getDog_weight()));
-
             }
 
             @Override
@@ -168,7 +181,20 @@ public class EditInfoActivity extends AppCompatActivity {
                retrofitClient.retrofitPostAPI.postUserUpdate(token, input).enqueue(new Callback<Data>() {
                    @Override
                    public void onResponse(Call<Data> call, Response<Data> response) {
-                       finish();
+
+                       if(response.isSuccessful()){
+                           finish();
+                       }else if(response.code() == 400){
+                           try {
+                               JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                               Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                           } catch (JSONException e) {
+                               e.printStackTrace();
+                           } catch (IOException e) {
+                               e.printStackTrace();
+                           }
+
+                       }
                    }
 
                    @Override
