@@ -109,6 +109,15 @@ public class FragmentRecord extends Fragment {
                 adapter.modifyFlag(TAG);
                 getIntake();
                 initScrollListener();
+
+                record_intake_btn.setTextColor(getResources().getColor(R.color.white));
+                record_intake_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
+
+                record_pee_color_btn.setTextColor(getResources().getColor(R.color.deep_gray));
+                record_pee_color_btn.setBackgroundResource(R.drawable.custom_record_btn);
+
+                record_poo_color_btn.setTextColor(getResources().getColor(R.color.deep_gray));
+                record_poo_color_btn.setBackgroundResource(R.drawable.custom_record_btn);
             }
         });
 
@@ -123,6 +132,15 @@ public class FragmentRecord extends Fragment {
                 Log.d("TAG_TEST", "태그 값: " + TAG);
                 getPee();
                 initScrollListener();
+
+                record_pee_color_btn.setTextColor(getResources().getColor(R.color.white));
+                record_pee_color_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
+
+                record_intake_btn.setTextColor(getResources().getColor(R.color.deep_gray));
+                record_intake_btn.setBackgroundResource(R.drawable.custom_record_btn);
+
+                record_poo_color_btn.setTextColor(getResources().getColor(R.color.deep_gray));
+                record_poo_color_btn.setBackgroundResource(R.drawable.custom_record_btn);
             }
         });
 
@@ -136,6 +154,15 @@ public class FragmentRecord extends Fragment {
                 adapter.modifyFlag(TAG);
                 getPoo();
                 initScrollListener();
+
+                record_poo_color_btn.setTextColor(getResources().getColor(R.color.white));
+                record_poo_color_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
+
+                record_intake_btn.setTextColor(getResources().getColor(R.color.deep_gray));
+                record_intake_btn.setBackgroundResource(R.drawable.custom_record_btn);
+
+                record_pee_color_btn.setTextColor(getResources().getColor(R.color.deep_gray));
+                record_pee_color_btn.setBackgroundResource(R.drawable.custom_record_btn);
             }
         });
 

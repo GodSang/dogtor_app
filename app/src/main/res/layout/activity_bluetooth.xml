@@ -144,7 +144,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="16dp"
         android:text="디바이스 등록"
-        android:backgroundTint="@color/main_color"
+        android:background="@drawable/custom_button"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"

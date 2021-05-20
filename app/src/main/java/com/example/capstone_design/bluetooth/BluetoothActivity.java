@@ -55,6 +55,7 @@ public class BluetoothActivity extends AppCompatActivity {
     private Button register_device_btn;
     private EditText input_wifi_name;
     private EditText input_wifi_pwd;
+    private EditText input_wifi_pin;
 
 
     private BluetoothAdapter btAdapter;
@@ -79,12 +80,13 @@ public class BluetoothActivity extends AppCompatActivity {
     // 해결 방안 -> flag값을 세워서 스캔 버튼을 눌렀을 때의 flag값일 때만 unregisterReceiver가 동작하도록 함
     private boolean bc_flag;
 
-    SharedPreferences loadShared = getSharedPreferences("DB", MODE_PRIVATE);
-
     // 라즈베리파이에 전송할 데이터
     String token;
     String wifi_name;
     String wifi_pwd;
+    String wifi_pin;
+
+    private SharedPreferences.Editor sharedEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,9 @@ public class BluetoothActivity extends AppCompatActivity {
         bluetooth_scan_btn = findViewById(R.id.bluetooth_scan_btn);
         scaned_bluetooth_list = findViewById(R.id.scaned_bluetooth_list);
         register_device_btn = findViewById(R.id.register_device_btn);
+
+        SharedPreferences saveShared = getSharedPreferences("DB", MODE_PRIVATE);
+        sharedEditor = saveShared.edit();
 
         SharedPreferences loadShared = getSharedPreferences("DB", MODE_PRIVATE);
 
@@ -189,14 +194,7 @@ public class BluetoothActivity extends AppCompatActivity {
         register_device_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Log.d(TAG, "address: " + address);
-                Log.d(TAG, "device: " + btAdapter.getRemoteDevice(address).getClass().getName());
-
                 device = btAdapter.getRemoteDevice(address);
-
-                Log.d(TAG, "name: " + name + "/" + "address: " + address);
-                Log.d(TAG, token + "/" + wifi_name + "/" + wifi_pwd);
 
                 // 소켓 생성 및 연결
                 try{
@@ -207,16 +205,14 @@ public class BluetoothActivity extends AppCompatActivity {
                     registered_device_info.setText("블루투스 연결 실패");
                     e.printStackTrace();
                 }
-
                 if(flag){
                     registered_device_info.setText( "'" + name + "'");
                     connectedThread = new ConnectedThread(btSocket);
                     connectedThread.start();
                 }
-
                 if(connectedThread!=null){
-                    connectedThread.write("from_app/" + token + "/" + wifi_name + "/" + wifi_pwd);
-                    Log.d(TAG, " [데이터 보냄] " + "디바이스 이름: " + device.getName() + "/ 디바이스 UUID: "  + device.getUuids() + "/ UID: " + token + "/ WIFI NAME: " + wifi_name + "/ WIFI PWD: " + wifi_pwd);
+                    connectedThread.write("from_app/" + token + "/" + wifi_name + "/" + wifi_pwd + "/" + wifi_pin);
+                    //Log.d(TAG, " [데이터 보냄] " + "디바이스 이름: " + device.getName() + "/ 디바이스 UUID: "  + device.getUuids() + "/ UID: " + token + "/ WIFI NAME: " + wifi_name + "/ WIFI PWD: " + wifi_pwd);
                 }
             }
         });
@@ -249,8 +245,14 @@ public class BluetoothActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                                 input_wifi_name = v.findViewById(R.id.input_wifi_name);
                                 input_wifi_pwd = v.findViewById(R.id.input_wifi_pwd);
+                                input_wifi_pin = v.findViewById(R.id.input_wifi_pin);
                                 wifi_name = input_wifi_name.getText().toString();
                                 wifi_pwd = input_wifi_pwd.getText().toString();
+                                wifi_pin = input_wifi_pin.getText().toString();
+
+                                sharedEditor.putString("PIN", "등록된 PIN 번호: " + wifi_pin);
+                                sharedEditor.commit();
+
                         }
                     })
                     .setNegativeButton(

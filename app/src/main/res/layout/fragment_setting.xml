@@ -78,6 +78,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/registered_pin"
+        android:text="등록된 PIN 번호가 없습니다."
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/setting_list">
+    </TextView>
+
     <Button
         android:id="@+id/logout_btn"
         android:layout_width="0dp"
@@ -87,6 +97,7 @@
         android:layout_marginRight="24dp"
         android:text="로그아웃"
         android:textStyle="bold"
+        android:background="@drawable/custom_button"
         android:backgroundTint="@color/main_color"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"

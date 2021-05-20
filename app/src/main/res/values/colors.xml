@@ -4,10 +4,11 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <!--teal_200이 웬만한 색들 디폴트 값임(달력 날짜 선택 때문에 main color와 동일하게 설정함-->
-    <color name="teal_200">#FDDB3A</color>
+    <color name="teal_200">#f6886d</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main_color">#FDDB3A</color>
+    <color name="main_color">#f6886d</color>
     <color name="gray">#BDBDBD</color>
+    <color name="deep_gray">#808080</color>
 </resources>

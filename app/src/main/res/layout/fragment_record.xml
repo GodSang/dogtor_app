@@ -40,38 +40,38 @@
             android:gravity="center_horizontal">
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/record_intake_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/main_color"
+                android:background="@drawable/custom_record_btn"
                 android:text="사료량"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/deep_gray"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/record_pee_color_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/main_color"
+                android:background="@drawable/custom_record_btn"
                 android:text="소변색"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/deep_gray"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/record_poo_color_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/main_color"
+                android:background="@drawable/custom_record_btn"
                 android:text="대변색"
-                android:textColor="@color/white"
+                android:textColor="@color/deep_gray"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 

@@ -36,6 +36,7 @@ public class FragmentSetting extends Fragment {
     private TextView setting_alarm;
     private Button logout_btn;
     private CircleImageView setting_profile_image;
+    private TextView registered_pin;
 
     Context mContext;
     String token;
@@ -58,8 +59,10 @@ public class FragmentSetting extends Fragment {
         setting_alarm = v.findViewById(R.id.setting_alarm);
         logout_btn = v.findViewById(R.id.logout_btn);
         setting_profile_image = v.findViewById(R.id.setting_profile_image);
+        registered_pin = v.findViewById(R.id.registered_pin);
 
         token = loadShared.getString("token", "");
+        registered_pin.setText(loadShared.getString("PIN", "등록된 PIN번호가 없습니다."));
         profile_image_tag = loadShared.getInt("profile_image" , 1);
 
         switch (profile_image_tag){

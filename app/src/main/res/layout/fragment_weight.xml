@@ -31,32 +31,47 @@
 
     <Spinner
         android:id="@+id/weight_spinner"
-        android:layout_width="210dp"
-        android:layout_height="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/weight_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/indicator"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHorizontal_bias="0.1"/>
 
     <Button
         android:id="@+id/weight_button"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:text="Button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="체지방 확인"
+        android:background="@drawable/custom_button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/weight_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/indicator" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/weight_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/weight_spinner"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHorizontal_bias="0.9"/>
 
     <TextView
         android:id="@+id/weight_textView"
-        android:layout_width="244dp"
-        android:layout_height="77dp"
-        android:text="TextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="반려견의 체지방 상태를 확인해보세요."
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weight_spinner" />
+        app:layout_constraintEnd_toEndOf="@id/weight_button"
+        app:layout_constraintStart_toStartOf="@id/weight_spinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintVertical_bias="0.9"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

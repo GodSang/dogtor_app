@@ -28,8 +28,9 @@
         android:layout_height="wrap_content"
         android:text="DOGTOR 서비스를 시작해보세요!"
         android:layout_marginTop="50dp"
-        android:textColor="@color/gray"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/deep_gray"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dogtor_logo">
@@ -53,7 +54,7 @@
         android:gravity="center"
         android:layout_marginBottom="16dp"
         android:text="Cyber security Capstone Design Team3"
-        android:textColor="@color/gray"
+        android:textColor="@color/deep_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
     </TextView>

@@ -17,6 +17,7 @@ public class FragmentGuide extends Fragment {
     private LinearLayout pee_color_guide;
     private LinearLayout poo_color_guide_btn;
     private LinearLayout poo_color_guide;
+    private LinearLayout guide_precautions;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,6 +28,7 @@ public class FragmentGuide extends Fragment {
         pee_color_guide = v.findViewById(R.id.pee_color_guide);
         poo_color_guide_btn = v.findViewById(R.id.poo_color_guide_btn);
         poo_color_guide = v.findViewById(R.id.poo_color_guide);
+        guide_precautions = v.findViewById(R.id.guide_precautions);
 
         pee_color_guide_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,12 @@ public class FragmentGuide extends Fragment {
                     pee_color_guide.setVisibility(View.VISIBLE);
                 }else{
                     pee_color_guide.setVisibility(View.GONE);
+                }
+
+                if(pee_color_guide.getVisibility()==View.GONE && poo_color_guide.getVisibility() == View.GONE){
+                    guide_precautions.setVisibility(View.VISIBLE);
+                }else{
+                    guide_precautions.setVisibility(View.GONE);
                 }
             }
         });
@@ -46,6 +54,12 @@ public class FragmentGuide extends Fragment {
                     poo_color_guide.setVisibility(View.VISIBLE);
                 }else{
                     poo_color_guide.setVisibility(View.GONE);
+                }
+
+                if(pee_color_guide.getVisibility()==View.GONE && poo_color_guide.getVisibility() == View.GONE){
+                    guide_precautions.setVisibility(View.VISIBLE);
+                }else{
+                    guide_precautions.setVisibility(View.GONE);
                 }
             }
         });
