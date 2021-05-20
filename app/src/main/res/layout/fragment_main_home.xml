@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintVertical_bias="0.1">
+        app:layout_constraintVertical_bias="0.08">
     </TextView>
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -31,7 +31,7 @@
         android:layout_height="0dp"
         android:src="@drawable/dog_profile_1"
         app:layout_constraintDimensionRatio="1"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/welcome_msg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,14 +45,14 @@
         android:text="이름: "
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/deep_gray"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/main_dog_profile_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.04">
+        app:layout_constraintHeight_percent="0.05">
     </TextView>
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="나이: "
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/deep_gray"
         android:layout_marginTop="12dp"
@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintHorizontal_bias="0.25">
@@ -80,7 +80,7 @@
         android:layout_height="0dp"
         android:gravity="center_vertical"
         android:text="성별: "
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:layout_marginTop="12dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/deep_gray"
@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintHorizontal_bias="0.75"></TextView>
@@ -98,7 +98,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="견종: "
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/deep_gray"
         android:gravity="center"
@@ -107,7 +107,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.04">
+        app:layout_constraintHeight_percent="0.05">
     </TextView>
 
     <TextView
@@ -117,14 +117,14 @@
         android:text="몸무게: "
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/deep_gray"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@+id/main_dog_kind"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.04">
+        app:layout_constraintHeight_percent="0.05">
     </TextView>
 
 

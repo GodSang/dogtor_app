@@ -31,6 +31,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="24dp"
                     android:text="소변색"
+                    android:textColor="@color/deep_gray"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"></TextView>
 
                 <ImageView
@@ -271,6 +272,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="24dp"
                     android:text="대변색"
+                    android:textColor="@color/deep_gray"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large">
                 </TextView>
 

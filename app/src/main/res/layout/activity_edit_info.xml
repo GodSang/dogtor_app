@@ -75,7 +75,7 @@
         android:text="이름: "
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/deep_gray"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/edit_dog_name"
@@ -91,7 +91,7 @@
         android:imeOptions="actionNext"
         android:hint="반려동물의 이름을 입력하세요."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:layout_marginLeft="72dp"
         android:layout_marginRight="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +109,7 @@
         android:text="나이: "
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/deep_gray"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/edit_dog_age"
@@ -144,7 +144,7 @@
         android:text="성별: "
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/deep_gray"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/edit_dog_gender"
@@ -178,6 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="M"
+                android:textColor="@color/deep_gray"
                 android:layout_weight="1">
             </RadioButton>
 
@@ -186,6 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="W"
+                android:textColor="@color/deep_gray"
                 android:layout_weight="1">
             </RadioButton>
 
@@ -194,6 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NONE"
+                android:textColor="@color/deep_gray"
                 android:layout_weight="1">
             </RadioButton>
         </RadioGroup>
@@ -207,7 +210,7 @@
         android:text="견종: "
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/deep_gray"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/edit_dog_type_spinner"
@@ -237,7 +240,7 @@
         android:text="몸무게: "
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/deep_gray"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/edit_dog_weight"

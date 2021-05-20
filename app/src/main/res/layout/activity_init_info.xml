@@ -97,6 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="M"
+                android:textColor="@color/deep_gray"
                 android:checked="true"
                 android:layout_weight="1">
             </RadioButton>
@@ -105,6 +106,7 @@
                 android:id="@+id/dog_gender_woman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/deep_gray"
                 android:text="W"
                 android:layout_weight="1">
             </RadioButton>
@@ -113,6 +115,7 @@
                 android:id="@+id/dog_gender_none"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/deep_gray"
                 android:text="NONE"
                 android:layout_weight="1">
             </RadioButton>
