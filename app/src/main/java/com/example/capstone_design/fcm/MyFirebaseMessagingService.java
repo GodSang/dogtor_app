@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
@@ -28,12 +29,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
     DateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
     String fcm_event_time = "";
 
-    private static final String CHANNEL_NAME = "FCM";
-    private static final String CHANNEL_DESC = "Firebase Cloud Messaging";
-
     private String TAG = "FirebaseService";
-
-    String saveSharedName = "FCM_DB";
 
     // 파이버베이스 토큰 가져오기
     @Override
@@ -49,33 +45,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         super.onMessageReceived(remoteMessage);
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
-        // 앱이 foreground 상태에서 Notification을 받는 경우
-        if(remoteMessage.getNotification() != null){
-            sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
-
-
-            timestamp = remoteMessage.getNotification().getEventTime();
-            fcm_event_time = format.format(timestamp);
-//
-//            SharedPreferences saveShared = getSharedPreferences(saveSharedName, MODE_PRIVATE);
-//            SharedPreferences.Editor sharedEditor = saveShared.edit();
-//            sharedEditor.putString("fcm_body", remoteMessage.getNotification().getBody());
-//            sharedEditor.putString("fcm_time", fcm_event_time);
-//            Log.d("fcm_body", "push fcm_body: " + remoteMessage.getNotification().getBody());
-//            sharedEditor.commit();
-
+        if(remoteMessage.getData()!=null){
+            sendNotification(remoteMessage.getData().get("body"), remoteMessage.getData().get("title"));
         }else{
-            sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
-
-            timestamp = remoteMessage.getNotification().getEventTime();
-            fcm_event_time = format.format(timestamp);
-//
-//            SharedPreferences saveShared = getSharedPreferences(saveSharedName, MODE_PRIVATE);
-//            SharedPreferences.Editor sharedEditor = saveShared.edit();
-//            sharedEditor.putString("fcm_body", remoteMessage.getNotification().getBody());
-//            sharedEditor.putString("fcm_time", fcm_event_time);
-//            Log.d("fcm_body", "push fcm_body: " + remoteMessage.getNotification().getBody());
-//            sharedEditor.commit();
+            sendNotification("" ,"");
         }
     }
 
@@ -84,42 +57,37 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+        SharedPreferences saveShared = getSharedPreferences("DB", MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = saveShared.edit();
 
-        Log.d("hyeals_m", "일단 로그 찍어봄");
+        sharedEditor.putString("fcm_body", body);
+        sharedEditor.commit();
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.d("hyeals_m", "일단 로그 찍어봄" + body);
+
+        String ChannelId = "FCM";
+        String ChannelName = "알림";
 
         Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         // 푸시알람 부가설정
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, getString(R.string.notification_channel_id))
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, ChannelId)
                 .setSmallIcon(R.drawable.dogtor_logo_icon)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(notificationSound)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.dogtor_logo_icon))
-                .setContentIntent(pendingIntent);
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.dogtor_logo_icon));
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
-                    getString(R.string.notification_channel_id), CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT
-            );
-            channel.setDescription(CHANNEL_DESC);
-            channel.setShowBadge(true);
-            channel.canShowBadge();
-            channel.enableLights(true);
-            channel.setLightColor(Color.RED);
-            channel.enableVibration(true);
-            channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500});
+                    ChannelId, ChannelName, NotificationManager.IMPORTANCE_HIGH);
 
-            assert notificationManager != null;
             notificationManager.createNotificationChannel(channel);
         }
 
-        assert notificationManager != null;
         notificationManager.notify(0, notificationBuilder.build());
 
     }

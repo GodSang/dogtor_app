@@ -34,11 +34,11 @@ public class FragmentMainHome extends Fragment {
     TextView main_dog_weight;
     TextView dog_status_info;
     TextView dog_status_info_time;
+    TextView fcm_msg;
 
     // SharedPreferences를 통해 fcm body 데이터 가져오기
-    String loadSharedName = "FCM_DB";
+    String loadSharedName = "DB";
     String fcm_body = "";
-    String fcm_time = "";
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
@@ -59,6 +59,7 @@ public class FragmentMainHome extends Fragment {
         main_dog_type = view.findViewById(R.id.main_dog_kind);
         main_dog_weight = view.findViewById(R.id.main_dog_weight);
         main_dog_profile_image = view.findViewById(R.id.main_dog_profile_image);
+        fcm_msg = view.findViewById(R.id.fcm_msg);
 
         Log.d("hyeals_bundle_fragment", "프래그먼트 실행");
 
@@ -70,15 +71,11 @@ public class FragmentMainHome extends Fragment {
         super.onResume();
 
         SharedPreferences loadShared = this.getActivity().getSharedPreferences(loadSharedName, Context.MODE_PRIVATE);
-        fcm_body = loadShared.getString("fcm_body", "");
-        fcm_time = loadShared.getString("fcm_time", "");
+        fcm_body = loadShared.getString("fcm_body", "아직 받은 알림이 없습니다.");
+        fcm_msg.setText(fcm_body);
 
         Log.d("fcm_body", "fcm body: " + fcm_body);
 
-        if(!fcm_body.equals("")){
-            dog_status_info.setText(fcm_body);
-            dog_status_info_time.setText(fcm_time);
-        }
 
         // GET 요청
         retrofitClient.retrofitGetAPI.getUser(token).enqueue(new Callback<Data>() {
