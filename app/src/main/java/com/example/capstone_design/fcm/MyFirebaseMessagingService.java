@@ -63,8 +63,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         sharedEditor.putString("fcm_body", body);
         sharedEditor.commit();
 
-        Log.d("hyeals_m", "일단 로그 찍어봄" + body);
-
         String ChannelId = "FCM";
         String ChannelName = "알림";
 

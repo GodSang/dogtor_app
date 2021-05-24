@@ -208,6 +208,10 @@ public class BluetoothActivity extends AppCompatActivity {
                 if(flag){
                     registered_device_info.setText( "'" + name + "'");
                     connectedThread = new ConnectedThread(btSocket);
+
+                    sharedEditor.putString("PIN", "등록된 PIN 번호: " + wifi_pin);
+                    sharedEditor.commit();
+
                     connectedThread.start();
                 }
                 if(connectedThread!=null){
@@ -249,9 +253,6 @@ public class BluetoothActivity extends AppCompatActivity {
                                 wifi_name = input_wifi_name.getText().toString();
                                 wifi_pwd = input_wifi_pwd.getText().toString();
                                 wifi_pin = input_wifi_pin.getText().toString();
-
-                                sharedEditor.putString("PIN", "등록된 PIN 번호: " + wifi_pin);
-                                sharedEditor.commit();
 
                         }
                     })

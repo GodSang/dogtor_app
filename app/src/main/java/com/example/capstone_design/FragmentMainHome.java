@@ -86,20 +86,20 @@ public class FragmentMainHome extends Fragment {
 
                     Log.d("hyeals_bundle", data.getDog_name());
 
-                    main_dog_name.setText("이름: " + data.getDog_name());
-                    main_dog_age.setText("나이: " + String.valueOf(data.getDog_birth()));
-                    main_dog_gender.setText("성별: " + data.getDog_gender());
-                    main_dog_weight.setText("몸무게: " + String.valueOf(data.getDog_weight()));
+                    main_dog_name.setText(data.getDog_name());
+                    main_dog_age.setText(String.valueOf(data.getDog_birth()) + "살");
+                    main_dog_gender.setText(data.getDog_gender());
+                    main_dog_weight.setText( String.valueOf(data.getDog_weight()) + " kg");
 
                     switch (data.getDog_type()){
                         case "small":
-                            main_dog_type.setText("견종: 소형견");
+                            main_dog_type.setText("소형견");
                             break;
                         case "medium":
-                            main_dog_type.setText("견종: 중형견");
+                            main_dog_type.setText("중형견");
                             break;
                         case "big":
-                            main_dog_type.setText("견종: 대형견");
+                            main_dog_type.setText("대형견");
                             break;
                     }
 

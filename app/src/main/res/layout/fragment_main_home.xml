@@ -25,6 +25,24 @@
         app:layout_constraintVertical_bias="0.06">
     </TextView>
 
+    <TextView
+        android:id="@+id/main_dog_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="이름: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        android:textColor="@color/deep_gray"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/welcome_msg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.05">
+    </TextView>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/main_dog_profile_image"
         android:layout_width="0dp"
@@ -32,12 +50,12 @@
         android:src="@drawable/dog_profile_1"
         app:layout_constraintDimensionRatio="1"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/welcome_msg"
+        app:layout_constraintTop_toBottomOf="@id/main_dog_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.5">
     </de.hdodenhof.circleimageview.CircleImageView>
-
+<!--
     <TextView
         android:id="@+id/main_dog_name"
         android:layout_width="0dp"
@@ -45,7 +63,7 @@
         android:text="이름: "
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/deep_gray"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:gravity="center"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/main_dog_profile_image"
@@ -54,7 +72,7 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.05">
     </TextView>
-
+-->
     <TextView
         android:id="@+id/main_dog_age"
         android:layout_width="wrap_content"
@@ -65,13 +83,24 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/deep_gray"
         android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/main_dog_name"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_dog_profile_image"
+        app:layout_constraintStart_toStartOf="@id/main_dog_profile_image"
+        app:layout_constraintEnd_toStartOf="@id/main_border_image"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.05">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/main_border_image"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_pets_white_24dp"
+        app:layout_constraintTop_toBottomOf="@id/main_dog_profile_image"
+        app:layout_constraintStart_toEndOf="@id/main_dog_age"
         app:layout_constraintEnd_toStartOf="@id/main_dog_gender"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.05"
-        app:layout_constraintHorizontal_bias="0.4">
-    </TextView>
+        app:layout_constraintHeight_percent="0.05"></ImageView>
 
     <TextView
         android:id="@+id/main_dog_gender"
@@ -83,9 +112,9 @@
         android:layout_marginTop="12dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/deep_gray"
-        app:layout_constraintTop_toBottomOf="@id/main_dog_name"
-        app:layout_constraintStart_toEndOf="@id/main_dog_age"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_dog_profile_image"
+        app:layout_constraintStart_toEndOf="@id/main_border_image"
+        app:layout_constraintEnd_toEndOf="@id/main_dog_profile_image"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.05"></TextView>
 
@@ -128,22 +157,38 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        android:background="@color/yellow"
+        android:background="@drawable/custom_fcm_msg_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_dog_weight"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/deep_gray"
-            android:text="[알림]"></TextView>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="최근에 받은 알림"></TextView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_notifications_none_white_24dp">
+            </ImageView>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/fcm_msg"
@@ -151,7 +196,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textSize="20sp"
-            android:textColor="@color/deep_gray"
+            android:textColor="@color/white"
             android:text="아직 받은 알림이 없습니다."></TextView>
     </LinearLayout>
 

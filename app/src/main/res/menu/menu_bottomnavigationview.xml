@@ -4,27 +4,27 @@
 
     <item
         android:id="@+id/main_home"
-        android:icon="?android:attr/listChoiceIndicatorMultiple"
+        android:icon="@drawable/ic_home_white_24dp"
         android:title="홈"
         app:showAsAction="always" />
     <item
         android:id="@+id/guide"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_article_white_24dp"
         android:title="가이드"
         app:showAsAction="always" />
     <item
         android:id="@+id/record"
-        android:icon="?attr/actionModePasteDrawable"
+        android:icon="@drawable/ic_date_range_white_24dp"
         android:title="기록"
         app:showAsAction="always" />
     <item
         android:id="@+id/weight"
-        android:icon="?android:attr/alertDialogIcon"
+        android:icon="@drawable/ic_monitor_weight_white_24dp"
         android:title="체지방"
         app:showAsAction="always"/>
     <item
         android:id="@+id/setting"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/ic_settings_white_24dp"
         android:title="설정"
         app:showAsAction="always" />
 </menu>

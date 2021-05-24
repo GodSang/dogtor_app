@@ -120,8 +120,8 @@ public class FragmentWeight extends Fragment {
 
     private String print_status(int weight, float fat) {
         String str;
-        str = "강아지의 현재 몸무게는 " + weight + " 입니다.\n"
-                + "해당 강아지의 권장 몸무게는 " + fat + " 입니다.";
+        str = "강아지의 현재 몸무게는 " + weight + "kg 입니다.\n"
+                + "해당 강아지의 권장 몸무게는 " + fat + "kg 입니다.";
         return str;
     }
 }

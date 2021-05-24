@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.TextView;
 
 import com.example.capstone_design.adapter.RecyclerViewAdapter;
 import com.example.capstone_design.retrofit.Data;
@@ -129,7 +130,6 @@ public class FragmentRecord extends Fragment {
                 // 리사이클러뷰에 사용할 리스트 초기화
                 record_list.clear();
                 adapter.modifyFlag(TAG);
-                Log.d("TAG_TEST", "태그 값: " + TAG);
                 getPee();
                 initScrollListener();
 
@@ -207,10 +207,22 @@ public class FragmentRecord extends Fragment {
         int count = record_list.size() - 1;
         adapter.notifyItemInserted(count);
 
+        if(TAG == "INTAKE"){
+                record_pee_color_btn.setEnabled(false);
+                record_poo_color_btn.setEnabled(false);
+            }else if(TAG == "PEE"){
+                record_intake_btn.setEnabled(false);
+                record_poo_color_btn.setEnabled(false);
+            }else{
+                record_intake_btn.setEnabled(false);
+                record_pee_color_btn.setEnabled(false);
+            }
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 Log.d("TAG_TEST", "Load_more 시작");
                 record_list.remove(count);
                 int scrollPosition = record_list.size();
@@ -248,6 +260,11 @@ public class FragmentRecord extends Fragment {
                     record_list.add(item);
                 }
                 adapter.notifyDataSetChanged();
+
+                if (!isLoading){
+                    record_pee_color_btn.setEnabled(true);
+                    record_poo_color_btn.setEnabled(true);
+                }
             }
 
             @Override
@@ -273,6 +290,11 @@ public class FragmentRecord extends Fragment {
                     Log.d("TAG_TEST", record_list.get(0).getRGB());
                 }
                 adapter.notifyDataSetChanged();
+
+                if (!isLoading){
+                    record_intake_btn.setEnabled(true);
+                    record_poo_color_btn.setEnabled(true);
+                }
             }
 
             @Override
@@ -297,6 +319,11 @@ public class FragmentRecord extends Fragment {
                     record_list.add(item);
                 }
                 adapter.notifyDataSetChanged();
+
+                if (!isLoading){
+                    record_intake_btn.setEnabled(true);
+                    record_pee_color_btn.setEnabled(true);
+                }
             }
 
             @Override
