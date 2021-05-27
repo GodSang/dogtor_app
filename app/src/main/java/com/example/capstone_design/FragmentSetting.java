@@ -62,7 +62,6 @@ public class FragmentSetting extends Fragment {
         registered_pin = v.findViewById(R.id.registered_pin);
 
         token = loadShared.getString("token", "");
-        registered_pin.setText(loadShared.getString("PIN", "등록된 PIN번호가 없습니다."));
         profile_image_tag = loadShared.getInt("profile_image" , 1);
 
         switch (profile_image_tag){
@@ -144,6 +143,8 @@ public class FragmentSetting extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        registered_pin.setText(loadShared.getString("PIN", "등록된 PIN번호가 없습니다."));
+
         profile_image_tag = loadShared.getInt("profile_image" , 1);
 
         switch (profile_image_tag){
