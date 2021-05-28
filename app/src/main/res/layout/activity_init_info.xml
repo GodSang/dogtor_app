@@ -11,7 +11,7 @@
         android:src="@drawable/dog_profile_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -56,7 +56,7 @@
         android:id="@+id/dog_age"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:imeOptions="actionNext"
+        android:imeOptions="actionDone"
         android:singleLine="true"
         android:hint="반려동물의 나이를 입력하세요"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -136,39 +136,39 @@
         app:layout_constraintTop_toBottomOf="@+id/dog_gender">
     </Spinner>
 
-    <!--<EditText
-        android:id="@+id/dog_kind"
+    <EditText
+        android:id="@+id/dog_weight"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/login_edit"
-        android:hint="반려동물의 견종을 입력하세요."
+        android:hint="반려동물의 몸무게를 입력하세요."
         android:imeOptions="actionNext"
+        android:inputType="number"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dog_gender"></EditText>
--->
+        app:layout_constraintTop_toBottomOf="@+id/dog_type_spinner"></EditText>
+
     <EditText
-        android:id="@+id/dog_weight"
+        android:id="@+id/dog_kcal"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:imeOptions="actionDone"
         android:singleLine="true"
-        android:hint="반려동물의 몸무게를 입력하세요."
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:hint="반려동물의 사료 칼로리를 입력하세요."
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:inputType="number"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dog_type_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/dog_weight"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08">
     </EditText>
@@ -187,7 +187,7 @@
         android:layout_marginRight="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dog_weight"
+        app:layout_constraintTop_toBottomOf="@id/dog_kcal"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.08">
     </Button>

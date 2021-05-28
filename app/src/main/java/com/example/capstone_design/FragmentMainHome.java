@@ -35,6 +35,7 @@ public class FragmentMainHome extends Fragment {
     TextView main_dog_gender;
     TextView main_dog_type;
     TextView main_dog_weight;
+    TextView main_dog_kcal;
     TextView fcm_msg;
     TextView eat_msg;
 
@@ -61,6 +62,7 @@ public class FragmentMainHome extends Fragment {
         main_dog_type = view.findViewById(R.id.main_dog_kind);
         main_dog_weight = view.findViewById(R.id.main_dog_weight);
         main_dog_profile_image = view.findViewById(R.id.main_dog_profile_image);
+        main_dog_kcal = view.findViewById(R.id.main_dog_kcal);
         fcm_msg = view.findViewById(R.id.fcm_msg);
         eat_msg = view.findViewById(R.id.eat_msg);
 
@@ -93,6 +95,7 @@ public class FragmentMainHome extends Fragment {
                     main_dog_age.setText(String.valueOf(data.getDog_birth()) + "살");
                     main_dog_gender.setText(data.getDog_gender());
                     main_dog_weight.setText( String.valueOf(data.getDog_weight()) + " kg");
+                    main_dog_kcal.setText(String.valueOf("사료 칼로리 = " + data.getDog_kcal() + "kcal"));
 
                     switch (data.getDog_type()){
                         case "small":

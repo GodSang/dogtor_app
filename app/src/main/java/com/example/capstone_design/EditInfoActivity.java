@@ -46,6 +46,7 @@ public class EditInfoActivity extends AppCompatActivity {
     private RadioButton edit_dog_gender_woman;
     private RadioButton edit_dog_gender_none;
     private Spinner edit_dog_type_spinner;
+    private EditText edit_dog_kcal;
 
     private CircleImageView profile_image1;
     private CircleImageView profile_image2;
@@ -80,6 +81,7 @@ public class EditInfoActivity extends AppCompatActivity {
         edit_dog_gender_man = findViewById(R.id.edit_dog_gender_man);
         edit_dog_gender_woman = findViewById(R.id.edit_dog_gender_woman);
         edit_dog_gender_none = findViewById(R.id.edit_dog_gender_none);
+        edit_dog_kcal = findViewById(R.id.edit_dog_kcal);
 
         edit_dog_type_spinner = findViewById(R.id.edit_dog_type_spinner);
 
@@ -135,6 +137,7 @@ public class EditInfoActivity extends AppCompatActivity {
                             break;
                     }
                     edit_dog_weight.setText(String.valueOf(data.getDog_weight()));
+                    edit_dog_kcal.setText(String.valueOf(data.getDog_kcal()));
                 }else if(response.code() == 400){
                     try {
                         JSONObject jsonObject = new JSONObject(response.errorBody().string());
@@ -174,6 +177,7 @@ public class EditInfoActivity extends AppCompatActivity {
                 input.put("dog_type", dog_type);
                 input.put("dog_weight", Integer.parseInt(edit_dog_weight.getText().toString()));
                 input.put("dog_image", profile_image_tag);
+                input.put("dog_kcal", Integer.parseInt(edit_dog_kcal.getText().toString()));
 
                 sharedEditor.putInt("profile_image", profile_image_tag);
                 sharedEditor.commit();

@@ -63,6 +63,9 @@ public class Data {
     @SerializedName("recommendMeal")
     private double recommendMeal;
 
+    @SerializedName("dog_kcal")
+    private int dog_kcal;
+
     public void setAmountOfMeal(int amountOfMeal) {
         this.amountOfMeal = amountOfMeal;
     }
@@ -201,5 +204,13 @@ public class Data {
 
     public void setRecommendMeal(double recommendMeal) {
         this.recommendMeal = recommendMeal;
+    }
+
+    public int getDog_kcal() {
+        return dog_kcal;
+    }
+
+    public void setDog_kcal(int dog_kcal) {
+        this.dog_kcal = dog_kcal;
     }
 }

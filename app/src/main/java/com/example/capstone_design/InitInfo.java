@@ -42,6 +42,7 @@ public class InitInfo extends AppCompatActivity {
     EditText dog_name_ed;
     EditText dog_birth_ed;
     EditText dog_weight_ed;
+    EditText dog_kcal_ed;
 
     Spinner dog_type_spinner;
 
@@ -77,6 +78,7 @@ public class InitInfo extends AppCompatActivity {
         dog_weight_ed = findViewById(R.id.dog_weight); // dog_weight // integer
         dog_gender_group = findViewById(R.id.dog_gender_group);
         dog_type_spinner = findViewById(R.id.dog_type_spinner);
+        dog_kcal_ed = findViewById(R.id.dog_kcal);
 
         String[] dog_type_spinner_items = getResources().getStringArray(R.array.dog_type_items);
         ArrayAdapter dog_type_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dog_type_spinner_items);
@@ -200,6 +202,7 @@ public class InitInfo extends AppCompatActivity {
                 input.put("dog_type", dog_type);
                 input.put("dog_weight", Integer.parseInt(dog_weight_ed.getText().toString()));
                 input.put("dog_image", profile_image_tag);
+                input.put("dog_kcal", Integer.parseInt(dog_kcal_ed.getText().toString()));
 
                 retrofitClient.retrofitPostAPI.postUser(input).enqueue(new Callback<Data>() {
                     @Override
