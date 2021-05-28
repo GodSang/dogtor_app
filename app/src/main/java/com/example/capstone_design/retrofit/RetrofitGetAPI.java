@@ -29,4 +29,8 @@ public interface RetrofitGetAPI {
     @GET("/weight/fat")
     Call<Data> getFat(@Header("Authorization") String authorization, @Query("dog_status") int status);
     // 체지방
+    //GET /intake/recommend
+    @GET("intake/recommend")
+    Call<Data> getRecommend(@Header("Authorization") String authorization, @Query("date") String date);
 }
+

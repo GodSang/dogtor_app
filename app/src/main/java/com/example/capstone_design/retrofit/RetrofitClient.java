@@ -12,3 +12,4 @@ public class RetrofitClient {
     public RetrofitGetAPI retrofitGetAPI = retrofit.create(RetrofitGetAPI.class);
     public RetrofitPostAPI retrofitPostAPI = retrofit.create(RetrofitPostAPI.class);
 }
+

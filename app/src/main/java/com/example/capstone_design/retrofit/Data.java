@@ -57,6 +57,12 @@ public class Data {
     @SerializedName("message")
     private String message;
 
+    @SerializedName("sumMeal")
+    private double sumMeal;
+
+    @SerializedName("recommendMeal")
+    private double recommendMeal;
+
     public void setAmountOfMeal(int amountOfMeal) {
         this.amountOfMeal = amountOfMeal;
     }
@@ -179,5 +185,21 @@ public class Data {
 
     public String getMessage() {
         return message;
+    }
+
+    public double getSumMeal() {
+        return sumMeal;
+    }
+
+    public void setSumMeal(double sumMeal) {
+        this.sumMeal = sumMeal;
+    }
+
+    public double getRecommendMeal() {
+        return recommendMeal;
+    }
+
+    public void setRecommendMeal(double recommendMeal) {
+        this.recommendMeal = recommendMeal;
     }
 }

@@ -19,6 +19,9 @@ import com.example.capstone_design.retrofit.RetrofitClient;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,9 +35,8 @@ public class FragmentMainHome extends Fragment {
     TextView main_dog_gender;
     TextView main_dog_type;
     TextView main_dog_weight;
-    TextView dog_status_info;
-    TextView dog_status_info_time;
     TextView fcm_msg;
+    TextView eat_msg;
 
     // SharedPreferences를 통해 fcm body 데이터 가져오기
     String loadSharedName = "DB";
@@ -60,6 +62,7 @@ public class FragmentMainHome extends Fragment {
         main_dog_weight = view.findViewById(R.id.main_dog_weight);
         main_dog_profile_image = view.findViewById(R.id.main_dog_profile_image);
         fcm_msg = view.findViewById(R.id.fcm_msg);
+        eat_msg = view.findViewById(R.id.eat_msg);
 
         Log.d("hyeals_bundle_fragment", "프래그먼트 실행");
 
@@ -77,7 +80,7 @@ public class FragmentMainHome extends Fragment {
         Log.d("fcm_body", "fcm body: " + fcm_body);
 
 
-        // GET 요청
+        // 반려견 정보 GET 요청
         retrofitClient.retrofitGetAPI.getUser(token).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
@@ -115,6 +118,33 @@ public class FragmentMainHome extends Fragment {
                             main_dog_profile_image.setImageResource(R.drawable.dog_profile_3);
                             break;
                     }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Data> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        // 전날 식사량 받아 오기 위해 어제 날짜 가져오기
+        SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.add(calendar.DATE, -1);
+        String yesterday = date.format(calendar.getTime());
+
+        Log.d("why", yesterday);
+
+        // 전날 및 권장 식사량 계산 정보
+        retrofitClient.retrofitGetAPI.getRecommend(token, yesterday).enqueue(new Callback<Data>() {
+            @Override
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                if(response.isSuccessful()){
+                    Data data = response.body();
+
+                    eat_msg.setText("전날 식사량은 "+data.getSumMeal() + "kcal 입니다.\n 권장 식사량은 "
+                            + data.getRecommendMeal() + "kcal 입니다." );
                 }
             }
 
