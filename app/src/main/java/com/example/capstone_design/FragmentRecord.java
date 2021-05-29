@@ -78,10 +78,6 @@ public class FragmentRecord extends Fragment {
         record_poo_color_btn = view.findViewById(R.id.record_poo_color_btn);
         record_recyclerview = view.findViewById(R.id.record_recyclerview);
 
-        //Data dummy = new Data();
-        //dummy.setAmountOfMeal(10);
-        //record_list.add(dummy);
-
         token = loadShared.getString("token", "");
 
         // 오늘 날짜 자동 선택
@@ -98,9 +94,6 @@ public class FragmentRecord extends Fragment {
             }
         });
 
-        initAdapter();
-        //initScrollListener();
-
         record_intake_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,9 +102,11 @@ public class FragmentRecord extends Fragment {
                 // 리사이클러뷰에 사용할 리스트 초기화
                 Log.d("WHAT_TAG", "intake page: " + intake_page);
                 record_list.clear();
+                initAdapter();
                 adapter.notifyDataSetChanged();
                 getIntake();
                 adapter.modifyFlag(TAG);
+                initScrollListener();
 
                 record_intake_btn.setTextColor(getResources().getColor(R.color.white));
                 record_intake_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
@@ -132,9 +127,11 @@ public class FragmentRecord extends Fragment {
                 // 리사이클러뷰에 사용할 리스트 초기화
                 Log.d("WHAT_TAG", "pee page: " + pee_page);
                 record_list.clear();
+                initAdapter();
                 adapter.notifyDataSetChanged();
                 getPee();
                 adapter.modifyFlag(TAG);
+                initScrollListener();
 
                 record_pee_color_btn.setTextColor(getResources().getColor(R.color.white));
                 record_pee_color_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
@@ -155,9 +152,11 @@ public class FragmentRecord extends Fragment {
                 // 리사이클러뷰에 사용할 리스트 초기화
                 Log.d("WHAT_TAG", "poo page: " + poo_page);
                 record_list.clear();
+                initAdapter();
                 adapter.notifyDataSetChanged();
                 getPoo();
                 adapter.modifyFlag(TAG);
+                initScrollListener();
 
                 record_poo_color_btn.setTextColor(getResources().getColor(R.color.white));
                 record_poo_color_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
@@ -174,7 +173,6 @@ public class FragmentRecord extends Fragment {
     }
 
     private void initAdapter(){
-        //Log.d("TAG_TEST", "어댑터에 들어갈 리스트 RGB 데이터: " + record_list.get(0).getRGB());
         adapter = new RecyclerViewAdapter(record_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         record_recyclerview.setAdapter(adapter);
