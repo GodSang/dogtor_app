@@ -200,7 +200,7 @@ public class InitInfo extends AppCompatActivity {
                 input.put("dog_birth", Integer.parseInt(dog_birth_ed.getText().toString()));
                 input.put("dog_gender", dog_gender);
                 input.put("dog_type", dog_type);
-                input.put("dog_weight", Integer.parseInt(dog_weight_ed.getText().toString()));
+                input.put("dog_weight",Float.parseFloat(dog_weight_ed.getText().toString()));
                 input.put("dog_image", profile_image_tag);
                 input.put("dog_kcal", Integer.parseInt(dog_kcal_ed.getText().toString()));
 

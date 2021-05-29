@@ -43,7 +43,7 @@ public class Data {
     private String dog_gender;
 
     @SerializedName("dog_weight")
-    private Integer dog_weight;
+    private float dog_weight;
 
     @SerializedName("key")
     private String key;
@@ -154,11 +154,11 @@ public class Data {
         return dog_gender;
     }
 
-    public void setDog_weight(Integer dog_weight) {
+    public void setDog_weight(float dog_weight) {
         this.dog_weight = dog_weight;
     }
 
-    public Integer getDog_weight() {
+    public float getDog_weight() {
         return dog_weight;
     }
 

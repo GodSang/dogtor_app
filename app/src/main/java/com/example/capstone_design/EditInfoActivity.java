@@ -175,7 +175,7 @@ public class EditInfoActivity extends AppCompatActivity {
                 input.put("dog_birth", Integer.parseInt(edit_dog_age.getText().toString()));
                 input.put("dog_gender", dog_gender);
                 input.put("dog_type", dog_type);
-                input.put("dog_weight", Integer.parseInt(edit_dog_weight.getText().toString()));
+                input.put("dog_weight", Float.parseFloat(edit_dog_weight.getText().toString()));
                 input.put("dog_image", profile_image_tag);
                 input.put("dog_kcal", Integer.parseInt(edit_dog_kcal.getText().toString()));
 

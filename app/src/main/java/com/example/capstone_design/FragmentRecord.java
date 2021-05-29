@@ -78,16 +78,16 @@ public class FragmentRecord extends Fragment {
         record_poo_color_btn = view.findViewById(R.id.record_poo_color_btn);
         record_recyclerview = view.findViewById(R.id.record_recyclerview);
 
-        Data dummy = new Data();
-        dummy.setAmountOfMeal(10);
-        record_list.add(dummy);
+        //Data dummy = new Data();
+        //dummy.setAmountOfMeal(10);
+        //record_list.add(dummy);
 
         token = loadShared.getString("token", "");
 
         // 오늘 날짜 자동 선택
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         selected_date = format.format(Calendar.getInstance().getTime());
-        Log.d("TAG_TEST", selected_date);
+        Log.d("TAG_TEST", "init: " + selected_date);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -99,6 +99,7 @@ public class FragmentRecord extends Fragment {
         });
 
         initAdapter();
+        //initScrollListener();
 
         record_intake_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,10 +107,11 @@ public class FragmentRecord extends Fragment {
                 intake_page = 0;
                 TAG = "INTAKE";
                 // 리사이클러뷰에 사용할 리스트 초기화
+                Log.d("WHAT_TAG", "intake page: " + intake_page);
                 record_list.clear();
-                adapter.modifyFlag(TAG);
+                adapter.notifyDataSetChanged();
                 getIntake();
-                initScrollListener();
+                adapter.modifyFlag(TAG);
 
                 record_intake_btn.setTextColor(getResources().getColor(R.color.white));
                 record_intake_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
@@ -128,10 +130,11 @@ public class FragmentRecord extends Fragment {
                 pee_page = 0;
                 TAG = "PEE";
                 // 리사이클러뷰에 사용할 리스트 초기화
+                Log.d("WHAT_TAG", "pee page: " + pee_page);
                 record_list.clear();
-                adapter.modifyFlag(TAG);
+                adapter.notifyDataSetChanged();
                 getPee();
-                initScrollListener();
+                adapter.modifyFlag(TAG);
 
                 record_pee_color_btn.setTextColor(getResources().getColor(R.color.white));
                 record_pee_color_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
@@ -150,10 +153,11 @@ public class FragmentRecord extends Fragment {
                 poo_page = 0;
                 TAG = "POO";
                 // 리사이클러뷰에 사용할 리스트 초기화
+                Log.d("WHAT_TAG", "poo page: " + poo_page);
                 record_list.clear();
-                adapter.modifyFlag(TAG);
+                adapter.notifyDataSetChanged();
                 getPoo();
-                initScrollListener();
+                adapter.modifyFlag(TAG);
 
                 record_poo_color_btn.setTextColor(getResources().getColor(R.color.white));
                 record_poo_color_btn.setBackgroundResource(R.drawable.custom_record_btn_pressed);
@@ -170,7 +174,7 @@ public class FragmentRecord extends Fragment {
     }
 
     private void initAdapter(){
-        Log.d("TAG_TEST", "어댑터에 들어갈 리스트 RGB 데이터: " + record_list.get(0).getRGB());
+        //Log.d("TAG_TEST", "어댑터에 들어갈 리스트 RGB 데이터: " + record_list.get(0).getRGB());
         adapter = new RecyclerViewAdapter(record_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         record_recyclerview.setAdapter(adapter);
@@ -191,9 +195,12 @@ public class FragmentRecord extends Fragment {
 
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
 
-                if (!isLoading) {
+                Log.d("WHAT_TAG", TAG);
+
+                if (!isLoading&&record_list.isEmpty()==false) {
                     if (layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition() == record_list.size() - 1) {
                         //리스트 마지막
+
                         loadMore();
                         isLoading = true;
                     }
@@ -233,7 +240,6 @@ public class FragmentRecord extends Fragment {
                     getIntake();
                 }else if(TAG.equals("PEE")){
                     pee_page ++;
-                    Log.d("TAG_TEST", "리스트 마지막이라 추가 데이터 넣음");
                     getPee();
                 }else{
                     poo_page ++;
@@ -252,6 +258,8 @@ public class FragmentRecord extends Fragment {
             @Override
             public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
                 RecyclerViewData data = response.body();
+
+                Log.d("WHAT_TAG", "GET INTAKE");
 
                 get_record_data_list = data.getRows();
 
@@ -281,13 +289,13 @@ public class FragmentRecord extends Fragment {
             public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
                 RecyclerViewData data = response.body();
 
+                Log.d("WHAT_TAG", "GET PEE");
+
                 get_record_data_list = data.getRows();
 
                 // 리사이클러뷰에서 사용할 리스트에 GET으로 받아온 리스트 대입
                 for(Data item: get_record_data_list){
                     record_list.add(item);
-                    Log.d("TAG_TEST", "리스트에 데이터 넣음");
-                    Log.d("TAG_TEST", record_list.get(0).getRGB());
                 }
                 adapter.notifyDataSetChanged();
 
@@ -311,6 +319,8 @@ public class FragmentRecord extends Fragment {
             @Override
             public void onResponse(Call<RecyclerViewData> call, Response<RecyclerViewData> response) {
                 RecyclerViewData data = response.body();
+
+                Log.d("WHAT_TAG", "GET POO");
 
                 get_record_data_list = data.getRows();
 
